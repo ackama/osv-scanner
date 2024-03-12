@@ -119,7 +119,7 @@ func MakeRequest(r reporter.Reporter, query osv.BatchedQuery, offline bool, loca
 		pkg, err := toPackageDetails(query)
 
 		if err != nil {
-			// currently, this will actually only error if the PURL cannot be parses
+			// currently, this will actually only error if the PURL cannot be parsed
 			r.Errorf("skipping %s as it is not a valid PURL: %v\n", query.Package.PURL, err)
 			results = append(results, osv.Response{Vulns: []models.Vulnerability{}})
 

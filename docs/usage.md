@@ -24,7 +24,7 @@ nav_order: 4
 osv-scanner -r /path/to/your/dir
 ```
 
-The preceding command will find lockfiles, SBOMs, and git directories in your target directory and use them to determine the dependencies to check against the OSV database for any known vulnerabilities.
+The preceding command will find lockfiles, SBOMs(Software Bill of Materials), and git directories in your target directory and use them to determine the dependencies to check against the OSV database for any known vulnerabilities.
 
 The recursive flag `-r` or `--recursive` will tell the scanner to search all subdirectories in addition to the specified directory. It can find additional lockfiles, dependencies, and vulnerabilities. If your project has deeply nested subdirectories, a recursive search may take a long time.
 
