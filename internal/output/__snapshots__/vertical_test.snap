@@ -1,35 +1,35 @@
 
 [TestPrintVerticalResults_WithLicenseViolations/multiple_sources_with_a_mixed_count_of_packages,_no_license_violations - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
   no license violations found
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
   no known vulnerabilities found
   no license violations found
 
-path/to/my/third/lockfile: found 2 packages
+path/to/my/third/lockfile: found 2 packages with issues
   no known vulnerabilities found
   no license violations found
 
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/multiple_sources_with_a_mixed_count_of_packages,_some_license_violations - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
 
   1 license violation found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
   mine2@3.2.5 is using an incompatible license: Apache-2.0
 
   1 license violation found in path/to/my/second/lockfile
 
-path/to/my/third/lockfile: found 2 packages
+path/to/my/third/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
@@ -39,33 +39,33 @@ path/to/my/third/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/multiple_sources_with_a_mixed_count_of_packages,_some_license_violations#01 - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
-path/to/my/third/lockfile: found 2 packages
+path/to/my/third/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/multiple_sources_with_a_mixed_count_of_packages_across_ecosystems,_some_license_violations - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
 
   1 license violation found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
   mine2@3.2.5 is using an incompatible license: Apache-2.0
 
   1 license violation found in path/to/my/second/lockfile
 
-path/to/my/third/lockfile: found 2 packages
+path/to/my/third/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
@@ -75,21 +75,21 @@ path/to/my/third/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/multiple_sources_with_a_mixed_count_of_packages_and_groups,_some_license_violations - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
 
   1 license violation found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
   mine2@3.2.5 is using an incompatible license: Apache-2.0
 
   1 license violation found in path/to/my/second/lockfile
 
-path/to/my/third/lockfile: found 2 packages
+path/to/my/third/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
@@ -99,15 +99,15 @@ path/to/my/third/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/multiple_sources_with_no_packages - 1]
-path/to/my/first/lockfile: found 0 packages
+path/to/my/first/lockfile: found 0 packages with issues
   no known vulnerabilities found
   no license violations found
 
-path/to/my/second/lockfile: found 0 packages
+path/to/my/second/lockfile: found 0 packages with issues
   no known vulnerabilities found
   no license violations found
 
-path/to/my/third/lockfile: found 0 packages
+path/to/my/third/lockfile: found 0 packages with issues
   no known vulnerabilities found
   no license violations found
 
@@ -118,35 +118,35 @@ path/to/my/third/lockfile: found 0 packages
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/one_source_with_no_packages - 1]
-path/to/my/first/lockfile: found 0 packages
+path/to/my/first/lockfile: found 0 packages with issues
   no known vulnerabilities found
   no license violations found
 
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/one_source_with_one_package,_no_license_violations - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
   no license violations found
 
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/one_source_with_one_package,_no_licenses - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
   no license violations found
 
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/one_source_with_one_package_and_an_unknown_license - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
   no license violations found
 
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/one_source_with_one_package_and_multiple_license_violations - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using incompatible licenses: MIT, Apache-2.0
@@ -156,7 +156,7 @@ path/to/my/first/lockfile: found 1 package
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/one_source_with_one_package_and_one_license_violation - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
@@ -166,7 +166,7 @@ path/to/my/first/lockfile: found 1 package
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/one_source_with_one_package_and_one_license_violation_(dev) - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
@@ -176,21 +176,21 @@ path/to/my/first/lockfile: found 1 package
 ---
 
 [TestPrintVerticalResults_WithLicenseViolations/two_sources_with_packages,_one_license_violation - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
   mine1@1.2.3 is using an incompatible license: MIT
 
   1 license violation found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 1 package
+path/to/my/second/lockfile: found 1 package with issues
   no known vulnerabilities found
   no license violations found
 
 ---
 
 [TestPrintVerticalResults_WithMixedIssues/multiple_sources_with_a_mixed_count_of_packages,_some_vulnerabilities_and_license_violations - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -201,7 +201,7 @@ path/to/my/first/lockfile: found 1 package
 
   1 license violation found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
 
   mine2@3.2.5 is affected by the following vulnerabilities:
     OSV-2: Something less scary! (https://osv.dev/OSV-2)
@@ -209,7 +209,7 @@ path/to/my/second/lockfile: found 2 packages
   1 known vulnerability found in path/to/my/second/lockfile
   no license violations found
 
-path/to/my/third/lockfile: found 2 packages
+path/to/my/third/lockfile: found 2 packages with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -224,7 +224,7 @@ path/to/my/third/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithMixedIssues/one_source_with_one_package,_one_vulnerability,_and_one_license_violation - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -238,7 +238,7 @@ path/to/my/first/lockfile: found 1 package
 ---
 
 [TestPrintVerticalResults_WithMixedIssues/two_sources_with_packages,_one_vulnerability,_one_license_violation - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -246,7 +246,7 @@ path/to/my/first/lockfile: found 1 package
   1 known vulnerability found in path/to/my/first/lockfile
   no license violations found
 
-path/to/my/second/lockfile: found 1 package
+path/to/my/second/lockfile: found 1 package with issues
   no known vulnerabilities found
 
   mine2@5.9.0 is using an incompatible license: MIT
@@ -256,7 +256,7 @@ path/to/my/second/lockfile: found 1 package
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/multiple_sources_with_a_mixed_count_of_grouped_packages,_and_multiple_vulnerabilities - 1]
-path/to/my/first/lockfile: found 2 packages
+path/to/my/first/lockfile: found 2 packages with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -266,7 +266,7 @@ path/to/my/first/lockfile: found 2 packages
 
   3 known vulnerabilities found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
 
   mine2@3.2.5 is affected by the following vulnerabilities:
     OSV-2: Something less scary! (https://osv.dev/OSV-2)
@@ -279,7 +279,7 @@ path/to/my/second/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/multiple_sources_with_a_mixed_count_of_packages,_and_multiple_vulnerabilities - 1]
-path/to/my/first/lockfile: found 2 packages
+path/to/my/first/lockfile: found 2 packages with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -289,7 +289,7 @@ path/to/my/first/lockfile: found 2 packages
 
   3 known vulnerabilities found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
 
   mine2@3.2.5 is affected by the following vulnerabilities:
     OSV-2: Something less scary! (https://osv.dev/OSV-2)
@@ -302,33 +302,33 @@ path/to/my/second/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/multiple_sources_with_a_mixed_count_of_packages,_no_vulnerabilities - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
-path/to/my/third/lockfile: found 2 packages
+path/to/my/third/lockfile: found 2 packages with issues
   no known vulnerabilities found
 
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/multiple_sources_with_a_mixed_count_of_packages,_some_vulnerabilities - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
 
   1 known vulnerability found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
 
   mine2@3.2.5 is affected by the following vulnerabilities:
     OSV-2: Something less scary! (https://osv.dev/OSV-2)
 
   1 known vulnerability found in path/to/my/second/lockfile
 
-path/to/my/third/lockfile: found 2 packages
+path/to/my/third/lockfile: found 2 packages with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -338,7 +338,7 @@ path/to/my/third/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/multiple_sources_with_a_mixed_count_of_packages_across_ecosystems,_and_multiple_vulnerabilities - 1]
-path/to/my/first/lockfile: found 2 packages
+path/to/my/first/lockfile: found 2 packages with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -348,7 +348,7 @@ path/to/my/first/lockfile: found 2 packages
 
   3 known vulnerabilities found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 2 packages
+path/to/my/second/lockfile: found 2 packages with issues
 
   mine2@3.2.5 is affected by the following vulnerabilities:
     OSV-2: Something less scary! (https://osv.dev/OSV-2)
@@ -361,13 +361,13 @@ path/to/my/second/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/multiple_sources_with_no_packages - 1]
-path/to/my/first/lockfile: found 0 packages
+path/to/my/first/lockfile: found 0 packages with issues
   no known vulnerabilities found
 
-path/to/my/second/lockfile: found 0 packages
+path/to/my/second/lockfile: found 0 packages with issues
   no known vulnerabilities found
 
-path/to/my/third/lockfile: found 0 packages
+path/to/my/third/lockfile: found 0 packages with issues
   no known vulnerabilities found
 
 ---
@@ -377,19 +377,19 @@ path/to/my/third/lockfile: found 0 packages
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/one_source_with_no_packages - 1]
-path/to/my/first/lockfile: found 0 packages
+path/to/my/first/lockfile: found 0 packages with issues
   no known vulnerabilities found
 
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/one_source_with_one_package,_no_vulnerabilities - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
   no known vulnerabilities found
 
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/one_source_with_one_package_and_one_vulnerability - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -399,7 +399,7 @@ path/to/my/first/lockfile: found 1 package
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/one_source_with_one_package_and_one_vulnerability_(dev) - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -409,7 +409,7 @@ path/to/my/first/lockfile: found 1 package
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/one_source_with_one_package_and_two_aliases_of_a_single_vulnerability - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
@@ -420,7 +420,7 @@ path/to/my/first/lockfile: found 1 package
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/one_source_with_vulnerabilities,_some_missing_content - 1]
-path/to/my/first/lockfile: found 2 packages
+path/to/my/first/lockfile: found 2 packages with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: This vulnerability allows for some very scary stuff to happen - seriously,... (https://osv.dev/OSV-1)
@@ -432,27 +432,27 @@ path/to/my/first/lockfile: found 2 packages
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/two_sources_with_packages,_one_vulnerability - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
 
   1 known vulnerability found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 1 package
+path/to/my/second/lockfile: found 1 package with issues
   no known vulnerabilities found
 
 ---
 
 [TestPrintVerticalResults_WithVulnerabilities/two_sources_with_the_same_vulnerable_package - 1]
-path/to/my/first/lockfile: found 1 package
+path/to/my/first/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
 
   1 known vulnerability found in path/to/my/first/lockfile
 
-path/to/my/second/lockfile: found 1 package
+path/to/my/second/lockfile: found 1 package with issues
 
   mine1@1.2.3 is affected by the following vulnerabilities:
     OSV-1: Something scary! (https://osv.dev/OSV-1)
