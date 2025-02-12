@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"os"
 	"os/exec"
@@ -135,7 +136,7 @@ var GlobalScanFlags = []cli.Flag{
 // OpenHTML will attempt to open the outputted HTML file in the default browser
 func OpenHTML(r reporter.Reporter, outputPath string) {
 	// Open the outputted HTML file in the default browser.
-	r.Infof("Opening %s...\n", outputPath)
+	slog.Info("Opening %s...\n", outputPath)
 	var err error
 	switch runtime.GOOS {
 	case "linux":
@@ -145,11 +146,11 @@ func OpenHTML(r reporter.Reporter, outputPath string) {
 	case "darwin": // macOS
 		err = exec.Command("open", outputPath).Start()
 	default:
-		r.Infof("Unsupported OS.\n")
+		slog.Info("Unsupported OS.\n")
 	}
 
 	if err != nil {
-		r.Errorf("Failed to open: %s.\n Please manually open the outputted HTML file: %s\n", err, outputPath)
+		slog.Error("Failed to open: %s.\n Please manually open the outputted HTML file: %s\n", err, outputPath)
 	}
 }
 
@@ -158,7 +159,7 @@ func OpenHTML(r reporter.Reporter, outputPath string) {
 // until the user manually terminates it (e.g. using Ctrl+C).
 func ServeHTML(r reporter.Reporter, outputPath string) {
 	localhostURL := fmt.Sprintf("http://localhost:%s/", servePort)
-	r.Infof("Serving HTML report at %s.\nIf you are accessing remotely, use the following SSH command:\n`ssh -L local_port:destination_server_ip:%s ssh_server_hostname`\n", localhostURL, servePort)
+	slog.Info("Serving HTML report at %s.\nIf you are accessing remotely, use the following SSH command:\n`ssh -L local_port:destination_server_ip:%s ssh_server_hostname`\n", localhostURL, servePort)
 	server := &http.Server{
 		Addr: ":" + servePort,
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -167,7 +168,7 @@ func ServeHTML(r reporter.Reporter, outputPath string) {
 		ReadHeaderTimeout: 3 * time.Second,
 	}
 	if err := server.ListenAndServe(); err != nil {
-		r.Errorf("Failed to start server: %v\n", err)
+		slog.Error("Failed to start server: %v\n", err)
 	}
 }
 
