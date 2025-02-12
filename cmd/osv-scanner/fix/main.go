@@ -25,7 +25,6 @@ import (
 	"github.com/google/osv-scanner/v2/internal/resolution/manifest"
 	"github.com/google/osv-scanner/v2/internal/resolution/util"
 	"github.com/google/osv-scanner/v2/internal/version"
-	"github.com/google/osv-scanner/v2/pkg/reporter"
 	"github.com/ossf/osv-schema/bindings/go/osvschema"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/term"
@@ -57,7 +56,7 @@ type osvFixOptions struct {
 	NoIntroduce bool
 }
 
-func Command(stdout, stderr io.Writer, r *reporter.Reporter) *cli.Command {
+func Command(stdout, stderr io.Writer) *cli.Command {
 	return &cli.Command{
 		Name:        "fix",
 		Usage:       "[EXPERIMENTAL] scans a manifest and/or lockfile for vulnerabilities and suggests changes for remediating them",
@@ -222,15 +221,12 @@ func Command(stdout, stderr io.Writer, r *reporter.Reporter) *cli.Command {
 			},
 		},
 		Action: func(ctx *cli.Context) error {
-			var err error
-			*r, err = action(ctx, stdout, stderr)
-
-			return err
+			return action(ctx, stdout, stderr)
 		},
 	}
 }
 
-func parseUpgradeConfig(ctx *cli.Context, r reporter.Reporter) upgrade.Config {
+func parseUpgradeConfig(ctx *cli.Context) upgrade.Config {
 	config := upgrade.NewConfig()
 
 	if ctx.IsSet("disallow-major-upgrades") {
@@ -282,9 +278,9 @@ func parseUpgradeConfig(ctx *cli.Context, r reporter.Reporter) upgrade.Config {
 	return config
 }
 
-func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, error) {
+func action(ctx *cli.Context, stdout, stderr io.Writer) error {
 	if !ctx.IsSet("manifest") && !ctx.IsSet("lockfile") {
-		return nil, errors.New("manifest or lockfile is required")
+		return errors.New("manifest or lockfile is required")
 	}
 
 	r := new(outputReporter)
@@ -311,7 +307,7 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 			DevDeps:       !ctx.Bool("ignore-dev"),
 			MinSeverity:   ctx.Float64("min-severity"),
 			MaxDepth:      ctx.Int("max-depth"),
-			UpgradeConfig: parseUpgradeConfig(ctx, r),
+			UpgradeConfig: parseUpgradeConfig(ctx),
 		},
 		Manifest:    ctx.String("manifest"),
 		Lockfile:    ctx.String("lockfile"),
@@ -322,7 +318,7 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 	if opts.Lockfile != "" {
 		rw, err := lockfile.GetReadWriter(opts.Lockfile)
 		if err != nil {
-			return nil, err
+			return err
 		}
 		opts.LockfileRW = rw
 		system = rw.System()
@@ -331,7 +327,7 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 	if opts.Manifest != "" {
 		rw, err := manifest.GetReadWriter(opts.Manifest, ctx.String("maven-registry"))
 		if err != nil {
-			return nil, err
+			return err
 		}
 		opts.ManifestRW = rw
 		// Prefer the manifest's system over the lockfile's.
@@ -343,7 +339,7 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 	case "deps.dev":
 		cl, err := client.NewDepsDevClient(depsdev.DepsdevAPI, "osv-scanner_fix/"+version.OSVVersion)
 		if err != nil {
-			return nil, err
+			return err
 		}
 		opts.Client.DependencyClient = cl
 	case "native":
@@ -358,19 +354,19 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 			}
 			cl, err := client.NewNpmRegistryClient(workDir)
 			if err != nil {
-				return nil, err
+				return err
 			}
 			opts.Client.DependencyClient = cl
 		case resolve.Maven:
 			cl, err := client.NewMavenRegistryClient(ctx.String("maven-registry"))
 			if err != nil {
-				return nil, err
+				return err
 			}
 			opts.Client.DependencyClient = cl
 		case resolve.UnknownSystem:
 			fallthrough
 		default:
-			return nil, fmt.Errorf("native data-source currently unsupported for %s ecosystem", system.String())
+			return fmt.Errorf("native data-source currently unsupported for %s ecosystem", system.String())
 		}
 	}
 
@@ -382,7 +378,7 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 			ctx.Bool("experimental-download-offline-databases"),
 		)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		eco, ok := util.OSVEcosystem[system]
@@ -391,7 +387,7 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 			panic("unhandled resolve.Ecosystem: " + system.String())
 		}
 		if err := matcher.LoadEcosystem(ctx.Context, ecosystem.Parsed{Ecosystem: osvschema.Ecosystem(eco)}); err != nil {
-			return nil, err
+			return err
 		}
 
 		opts.Client.VulnerabilityMatcher = matcher
@@ -409,7 +405,7 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 	}
 
 	if !ctx.Bool("non-interactive") {
-		return nil, interactiveMode(ctx.Context, opts)
+		return interactiveMode(ctx.Context, opts)
 	}
 
 	maxUpgrades := ctx.Int("apply-top")
@@ -429,17 +425,17 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 		case remediation.SupportsInPlace(opts.LockfileRW):
 			strategy = strategyInPlace
 		default:
-			return nil, errors.New("no supported remediation strategies for manifest/lockfile")
+			return errors.New("no supported remediation strategies for manifest/lockfile")
 		}
 	}
 
 	switch strategy {
 	case strategyRelax:
-		return r, autoRelax(ctx.Context, r, opts, maxUpgrades)
+		return autoRelax(ctx.Context, r, opts, maxUpgrades)
 	case strategyInPlace:
-		return r, autoInPlace(ctx.Context, r, opts, maxUpgrades)
+		return autoInPlace(ctx.Context, r, opts, maxUpgrades)
 	case strategyOverride:
-		return r, autoOverride(ctx.Context, r, opts, maxUpgrades)
+		return autoOverride(ctx.Context, r, opts, maxUpgrades)
 	default:
 		// The strategy flag should already be validated by this point.
 		panic(fmt.Sprintf("non-interactive mode attempted to run with unhandled strategy: \"%s\"", ctx.String("strategy")))

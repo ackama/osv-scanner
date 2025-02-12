@@ -3,7 +3,6 @@ package update
 import (
 	"errors"
 	"fmt"
-	"io"
 	"os"
 
 	"github.com/google/osv-scanner/v2/internal/depsdev"
@@ -12,11 +11,10 @@ import (
 	"github.com/google/osv-scanner/v2/internal/resolution/manifest"
 	"github.com/google/osv-scanner/v2/internal/version"
 	"github.com/google/osv-scanner/v2/pkg/lockfile"
-	"github.com/google/osv-scanner/v2/pkg/reporter"
 	"github.com/urfave/cli/v2"
 )
 
-func Command(stdout, stderr io.Writer, r *reporter.Reporter) *cli.Command {
+func Command() *cli.Command {
 	return &cli.Command{
 		Hidden: true,
 		Name:   "update",
@@ -43,10 +41,7 @@ func Command(stdout, stderr io.Writer, r *reporter.Reporter) *cli.Command {
 			},
 		},
 		Action: func(ctx *cli.Context) error {
-			var err error
-			*r, err = action(ctx, stdout, stderr)
-
-			return err
+			return action(ctx)
 		},
 	}
 }
@@ -61,7 +56,7 @@ type updateOptions struct {
 	ManifestRW manifest.ReadWriter
 }
 
-func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, error) {
+func action(ctx *cli.Context) error {
 	options := updateOptions{
 		Manifest:   ctx.String("manifest"),
 		NoUpdates:  ctx.StringSlice("disallow-package-upgrades"),
@@ -69,34 +64,34 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 		IgnoreDev:  ctx.Bool("ignore-dev"),
 	}
 	if _, err := os.Stat(options.Manifest); errors.Is(err, os.ErrNotExist) {
-		return nil, fmt.Errorf("file not found: %s", options.Manifest)
+		return fmt.Errorf("file not found: %s", options.Manifest)
 	} else if err != nil {
-		return nil, err
+		return err
 	}
 
 	var err error
 	options.Client.DependencyClient, err = client.NewDepsDevClient(depsdev.DepsdevAPI, "osv-scanner_update/"+version.OSVVersion)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	options.ManifestRW, err = manifest.GetReadWriter(options.Manifest, "")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	df, err := lockfile.OpenLocalDepFile(options.Manifest)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	mf, err := options.ManifestRW.Read(df)
 	df.Close() // Close the dep file and we may re-open it for writing
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	suggester, err := suggest.GetSuggester(mf.System())
 	if err != nil {
-		return nil, err
+		return err
 	}
 	patch, err := suggester.Suggest(ctx.Context, options.Client, mf, suggest.Options{
 		IgnoreDev:  options.IgnoreDev,
@@ -104,8 +99,8 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 		AvoidMajor: options.AvoidMajor,
 	})
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return reporter.NewTableReporter(stdout, stderr, reporter.InfoLevel, false, 0), manifest.Overwrite(options.ManifestRW, options.Manifest, patch)
+	return manifest.Overwrite(options.ManifestRW, options.Manifest, patch)
 }
