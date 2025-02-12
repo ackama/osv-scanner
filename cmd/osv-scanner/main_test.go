@@ -1003,7 +1003,8 @@ func TestRun_InsertDefaultCommand(t *testing.T) {
 	for _, tt := range tests {
 		stdout := &bytes.Buffer{}
 		stderr := &bytes.Buffer{}
-		argsActual := insertDefaultCommand(tt.originalArgs, commands, defaultCommand, stdout, stderr)
+		// todo: make this actually work
+		argsActual := insertDefaultCommand(tt.originalArgs, commands, defaultCommand)
 		if !reflect.DeepEqual(argsActual, tt.wantArgs) {
 			t.Errorf("Test Failed. Details:\n"+
 				"Args (Got):  %s\n"+

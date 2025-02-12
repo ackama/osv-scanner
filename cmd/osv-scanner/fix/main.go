@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -233,7 +234,7 @@ func parseUpgradeConfig(ctx *cli.Context, r reporter.Reporter) upgrade.Config {
 	config := upgrade.NewConfig()
 
 	if ctx.IsSet("disallow-major-upgrades") {
-		r.Warnf("WARNING: `--disallow-major-upgrades` flag is deprecated, use `--upgrade-config minor` instead\n")
+		slog.Warn("WARNING: `--disallow-major-upgrades` flag is deprecated, use `--upgrade-config minor` instead\n")
 		if ctx.Bool("disallow-major-upgrades") {
 			config.SetDefault(upgrade.Minor)
 		} else {
@@ -241,7 +242,7 @@ func parseUpgradeConfig(ctx *cli.Context, r reporter.Reporter) upgrade.Config {
 		}
 	}
 	if ctx.IsSet("disallow-package-upgrades") {
-		r.Warnf("WARNING: `--disallow-package-upgrades` flag is deprecated, use `--upgrade-config PKG:none` instead\n")
+		slog.Warn("WARNING: `--disallow-package-upgrades` flag is deprecated, use `--upgrade-config PKG:none` instead\n")
 		for _, pkg := range ctx.StringSlice("disallow-package-upgrades") {
 			config.Set(pkg, upgrade.None)
 		}
@@ -250,7 +251,7 @@ func parseUpgradeConfig(ctx *cli.Context, r reporter.Reporter) upgrade.Config {
 	for _, spec := range ctx.StringSlice("upgrade-config") {
 		idx := strings.LastIndex(spec, ":")
 		if idx == 0 {
-			r.Warnf("WARNING: `--upgrade-config %s` - skipping empty package name\n", spec)
+			slog.Warn("WARNING: `--upgrade-config %s` - skipping empty package name\n", spec)
 			continue
 		}
 		pkg := ""
@@ -270,11 +271,11 @@ func parseUpgradeConfig(ctx *cli.Context, r reporter.Reporter) upgrade.Config {
 		case "none":
 			level = upgrade.None
 		default:
-			r.Warnf("WARNING: `--upgrade-config %s` - invalid level string '%s'\n", spec, levelStr)
+			slog.Warn("WARNING: `--upgrade-config %s` - invalid level string '%s'\n", spec, levelStr)
 			continue
 		}
 		if config.Set(pkg, level) { // returns true if was previously set
-			r.Warnf("WARNING: `--upgrade-config %s` - config for package specified multiple times\n", spec)
+			slog.Warn("WARNING: `--upgrade-config %s` - config for package specified multiple times\n", spec)
 		}
 	}
 
