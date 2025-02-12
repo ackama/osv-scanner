@@ -67,7 +67,7 @@ func extractClassMappings(inv *extractor.Inventory, classMap map[string][]string
 	defer os.Remove(file.Name())
 	defer file.Close()
 
-	slog.Debug("downloading", "jar", jarURL)
+	slog.Debug(fmt.Sprint("downloading", "jar", jarURL))
 	resp, err := http.Get(jarURL)
 	if err != nil {
 		return err
@@ -98,7 +98,7 @@ func extractClassMappings(inv *extractor.Inventory, classMap map[string][]string
 			name := strings.TrimSuffix(f.Name, ".class")
 			classMap[name] = append(classMap[name],
 				fmt.Sprintf("%s:%s", metadata.GroupID, metadata.ArtifactID))
-			slog.Debug("mapping", "name", name, "to", classMap[name])
+			slog.Debug(fmt.Sprint("mapping", "name", name, "to", classMap[name]))
 		}
 	}
 	lock.Unlock()
