@@ -173,9 +173,9 @@ func Action(context *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, 
 	// Auto-open outputted HTML file for users.
 	if outputPath != "" {
 		if serve {
-			helper.ServeHTML(r, outputPath)
+			helper.ServeHTML(outputPath)
 		} else if format == "html" {
-			helper.OpenHTML(r, outputPath)
+			helper.OpenHTML(outputPath)
 		}
 	}
 

@@ -95,7 +95,7 @@ var ErrVulnerabilitiesFound = errors.New("vulnerabilities found")
 // TODO(v2): Actually use this error
 var ErrAPIFailed = errors.New("API query failed")
 
-func initializeExternalAccessors(r reporter.Reporter, actions ScannerActions) (ExternalAccessors, error) {
+func initializeExternalAccessors(actions ScannerActions) (ExternalAccessors, error) {
 	externalAccessors := ExternalAccessors{
 		DependencyClients: map[osvschema.Ecosystem]client.DependencyClient{},
 	}
@@ -105,7 +105,7 @@ func initializeExternalAccessors(r reporter.Reporter, actions ScannerActions) (E
 	// ------------
 	if actions.CompareOffline {
 		// --- Vulnerability Matcher ---
-		externalAccessors.VulnMatcher, err = localmatcher.NewLocalMatcher(r, actions.LocalDBPath, "osv-scanner_scan/"+version.OSVVersion, actions.DownloadDatabases)
+		externalAccessors.VulnMatcher, err = localmatcher.NewLocalMatcher(actions.LocalDBPath, "osv-scanner_scan/"+version.OSVVersion, actions.DownloadDatabases)
 		if err != nil {
 			return ExternalAccessors{}, err
 		}
@@ -200,7 +200,7 @@ func DoScan(actions ScannerActions, r reporter.Reporter) (models.VulnerabilityRe
 
 	// --- Setup Config ---
 	if actions.ConfigOverridePath != "" {
-		err := scanResult.ConfigManager.UseOverride(r, actions.ConfigOverridePath)
+		err := scanResult.ConfigManager.UseOverride(actions.ConfigOverridePath)
 		if err != nil {
 			slog.Error(fmt.Sprintf("Failed to read config file: %s\n", err))
 			return models.VulnerabilityResults{}, err
@@ -208,13 +208,13 @@ func DoScan(actions ScannerActions, r reporter.Reporter) (models.VulnerabilityRe
 	}
 
 	// --- Setup Accessors/Clients ---
-	accessors, err := initializeExternalAccessors(r, actions)
+	accessors, err := initializeExternalAccessors(actions)
 	if err != nil {
 		return models.VulnerabilityResults{}, fmt.Errorf("failed to initialize accessors: %w", err)
 	}
 
 	// ----- Perform Scanning -----
-	packages, err := scan(r, accessors, actions)
+	packages, err := scan(accessors, actions)
 	if err != nil {
 		return models.VulnerabilityResults{}, err
 	}
@@ -222,15 +222,15 @@ func DoScan(actions ScannerActions, r reporter.Reporter) (models.VulnerabilityRe
 	scanResult.PackageScanResults = packages
 
 	// ----- Filtering -----
-	filterUnscannablePackages(r, &scanResult)
-	filterIgnoredPackages(r, &scanResult)
+	filterUnscannablePackages(&scanResult)
+	filterIgnoredPackages(&scanResult)
 
 	// ----- Custom Overrides -----
-	overrideGoVersion(r, &scanResult)
+	overrideGoVersion(&scanResult)
 
 	// --- Make Vulnerability Requests ---
 	if accessors.VulnMatcher != nil {
-		err = makeVulnRequestWithMatcher(r, scanResult.PackageScanResults, accessors.VulnMatcher)
+		err = makeVulnRequestWithMatcher(scanResult.PackageScanResults, accessors.VulnMatcher)
 		if err != nil {
 			return models.VulnerabilityResults{}, err
 		}
@@ -244,9 +244,9 @@ func DoScan(actions ScannerActions, r reporter.Reporter) (models.VulnerabilityRe
 		}
 	}
 
-	results := buildVulnerabilityResults(r, actions, &scanResult)
+	results := buildVulnerabilityResults(actions, &scanResult)
 
-	filtered := filterResults(r, &results, &scanResult.ConfigManager, actions.ShowAllPackages)
+	filtered := filterResults(&results, &scanResult.ConfigManager, actions.ShowAllPackages)
 	if filtered > 0 {
 		slog.Info(fmt.Sprintf(
 			"Filtered %d %s from output\n",
@@ -271,7 +271,7 @@ func DoContainerScan(actions ScannerActions, r reporter.Reporter) (models.Vulner
 	}
 
 	if actions.ConfigOverridePath != "" {
-		err := scanResult.ConfigManager.UseOverride(r, actions.ConfigOverridePath)
+		err := scanResult.ConfigManager.UseOverride(actions.ConfigOverridePath)
 		if err != nil {
 			slog.Error(fmt.Sprintf("Failed to read config file: %s\n", err))
 			return models.VulnerabilityResults{}, err
@@ -279,7 +279,7 @@ func DoContainerScan(actions ScannerActions, r reporter.Reporter) (models.Vulner
 	}
 
 	// --- Setup Accessors/Clients ---
-	accessors, err := initializeExternalAccessors(r, actions)
+	accessors, err := initializeExternalAccessors(actions)
 	if err != nil {
 		return models.VulnerabilityResults{}, fmt.Errorf("failed to initialize accessors: %w", err)
 	}
@@ -291,7 +291,7 @@ func DoContainerScan(actions ScannerActions, r reporter.Reporter) (models.Vulner
 		slog.Info(fmt.Sprintf("Scanning local image tarball %q\n", actions.Image))
 		img, err = image.FromTarball(actions.Image, image.DefaultConfig())
 	} else if actions.Image != "" {
-		path, exportErr := imagehelpers.ExportDockerImage(r, actions.Image)
+		path, exportErr := imagehelpers.ExportDockerImage(actions.Image)
 		if exportErr != nil {
 			return models.VulnerabilityResults{}, exportErr
 		}
@@ -338,13 +338,13 @@ func DoContainerScan(actions ScannerActions, r reporter.Reporter) (models.Vulner
 	}
 
 	// ----- Filtering -----
-	filterUnscannablePackages(r, &scanResult)
+	filterUnscannablePackages(&scanResult)
 
-	filterNonContainerRelevantPackages(r, &scanResult)
+	filterNonContainerRelevantPackages(&scanResult)
 
 	// --- Make Vulnerability Requests ---
 	if accessors.VulnMatcher != nil {
-		err = makeVulnRequestWithMatcher(r, scanResult.PackageScanResults, accessors.VulnMatcher)
+		err = makeVulnRequestWithMatcher(scanResult.PackageScanResults, accessors.VulnMatcher)
 		if err != nil {
 			return models.VulnerabilityResults{}, err
 		}
@@ -369,9 +369,9 @@ func DoContainerScan(actions ScannerActions, r reporter.Reporter) (models.Vulner
 		}
 	}
 
-	results := buildVulnerabilityResults(r, actions, &scanResult)
+	results := buildVulnerabilityResults(actions, &scanResult)
 
-	filtered := filterResults(r, &results, &scanResult.ConfigManager, actions.ShowAllPackages)
+	filtered := filterResults(&results, &scanResult.ConfigManager, actions.ShowAllPackages)
 	if filtered > 0 {
 		slog.Info(fmt.Sprintf(
 			"Filtered %d %s from output\n",
@@ -416,7 +416,6 @@ func determineReturnErr(results models.VulnerabilityResults) error {
 
 // TODO(V2): Add context
 func makeVulnRequestWithMatcher(
-	r reporter.Reporter,
 	packages []imodels.PackageScanResult,
 	matcher clientinterfaces.VulnerabilityMatcher) error {
 	invs := make([]*extractor.Inventory, 0, len(packages))
@@ -440,11 +439,11 @@ func makeVulnRequestWithMatcher(
 }
 
 // Overrides Go version using osv-scanner.toml
-func overrideGoVersion(r reporter.Reporter, scanResults *results.ScanResults) {
+func overrideGoVersion(scanResults *results.ScanResults) {
 	for i, psr := range scanResults.PackageScanResults {
 		pkg := psr.PackageInfo
 		if pkg.Name() == "stdlib" && pkg.Ecosystem().Ecosystem == osvschema.EcosystemGo {
-			configToUse := scanResults.ConfigManager.Get(r, pkg.Location())
+			configToUse := scanResults.ConfigManager.Get(pkg.Location())
 			if configToUse.GoVersionOverride != "" {
 				scanResults.PackageScanResults[i].PackageInfo.Inventory.Version = configToUse.GoVersionOverride
 			}

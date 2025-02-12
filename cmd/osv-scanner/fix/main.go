@@ -377,7 +377,6 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) (reporter.Reporter, erro
 	userAgent := "osv-scanner_fix/" + version.OSVVersion
 	if ctx.Bool("experimental-offline-vulnerabilities") {
 		matcher, err := localmatcher.NewLocalMatcher(
-			r,
 			ctx.String("experimental-local-db-path"),
 			userAgent,
 			ctx.Bool("experimental-download-offline-databases"),
