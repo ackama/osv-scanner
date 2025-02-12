@@ -49,7 +49,7 @@ func main() {
 	for _, arg := range flag.Args() {
 		if strings.HasSuffix(arg, ".jar") {
 			if err := enumerateReachabilityForJar(arg); err != nil {
-				slog.Error("Failed to enumerate reachability for", "jar", arg, "error", err)
+				slog.Error(fmt.Sprint("Failed to enumerate reachability for", "jar", arg, "error", err))
 				os.Exit(1)
 			}
 		} else {
@@ -60,12 +60,12 @@ func main() {
 
 			result, err := EnumerateReachabilityFromClass(arg, *classPath)
 			if err != nil {
-				slog.Error("Failed to enumerate reachability for", "class", arg, "error", err)
+				slog.Error(fmt.Sprint("Failed to enumerate reachability for", "class", arg, "error", err))
 				os.Exit(1)
 			}
 
 			for _, class := range result.Classes {
-				slog.Info("Reachable", "class", class)
+				slog.Info(fmt.Sprint("Reachable", "class", class))
 			}
 		}
 	}
@@ -107,7 +107,7 @@ func enumerateReachabilityForJar(jarPath string) error {
 	}
 	defer os.RemoveAll(tmpDir)
 
-	slog.Info("Unzipping", "jar", jarPath, "to", tmpDir)
+	slog.Info(fmt.Sprint("Unzipping", "jar", jarPath, "to", tmpDir))
 	err = unzipJar(jarPath, tmpDir)
 	if err != nil {
 		return err
@@ -123,7 +123,7 @@ func enumerateReachabilityForJar(jarPath string) error {
 	if err != nil {
 		return err
 	}
-	slog.Info("Found", "main class", mainClass)
+	slog.Info(fmt.Sprint("Found", "main class", mainClass))
 
 	// Enumerate reachable classes.
 	result, err := EnumerateReachabilityFromClass(mainClass, tmpDir)
@@ -136,7 +136,7 @@ func enumerateReachabilityForJar(jarPath string) error {
 	for _, class := range result.Classes {
 		deps, err := classFinder.Find(class)
 		if err != nil {
-			slog.Error("Failed to find dep mapping", "class", class, "error", err)
+			slog.Error(fmt.Sprint("Failed to find dep mapping", "class", class, "error", err))
 			continue
 		}
 
@@ -152,10 +152,10 @@ func enumerateReachabilityForJar(jarPath string) error {
 	dynamicLoadingDeps := map[string]struct{}{}
 	slices.Sort(result.UsesDynamicCodeLoading)
 	for _, class := range result.UsesDynamicCodeLoading {
-		slog.Info("Found use of dynamic code loading", "class", class)
+		slog.Info(fmt.Sprint("Found use of dynamic code loading", "class", class))
 		deps, err := classFinder.Find(class)
 		if err != nil {
-			slog.Error("Failed to find dep mapping", "class", class, "error", err)
+			slog.Error(fmt.Sprint("Failed to find dep mapping", "class", class, "error", err))
 			continue
 		}
 		for _, dep := range deps {
@@ -165,13 +165,13 @@ func enumerateReachabilityForJar(jarPath string) error {
 
 	for _, dep := range slices.Sorted(maps.Keys(reachableDeps)) {
 		_, dynamicLoading := dynamicLoadingDeps[dep]
-		slog.Info("Reachable", "dep", dep, "dynamic code", dynamicLoading)
+		slog.Info(fmt.Sprint("Reachable", "dep", dep, "dynamic code", dynamicLoading))
 	}
 
 	for _, dep := range allDeps {
 		name := fmtJavaInventory(dep)
 		if _, ok := reachableDeps[name]; !ok {
-			slog.Info("Not reachable", "dep", name)
+			slog.Info(fmt.Sprint("Not reachable", "dep", name))
 		}
 	}
 	return nil
@@ -243,7 +243,7 @@ func enumerateReachability(cf *javareach.ClassFile, classPath string, seen map[s
 	if _, ok := seen[thisClass]; ok {
 		return nil
 	}
-	slog.Debug("Analyzing", "class", thisClass)
+	slog.Debug(fmt.Sprint("Analyzing", "class", thisClass))
 	seen[thisClass] = struct{}{}
 
 	for i, cp := range cf.ConstantPool {
@@ -257,7 +257,7 @@ func enumerateReachability(cf *javareach.ClassFile, classPath string, seen map[s
 		}
 
 		if isDynamicCodeLoading(method, descriptor) {
-			slog.Debug("found dynamic class loading", "thisClass", thisClass, "method", method, "descriptor", descriptor)
+			slog.Debug(fmt.Sprint("found dynamic class loading", "thisClass", thisClass, "method", method, "descriptor", descriptor))
 			codeLoading[thisClass] = struct{}{}
 			break
 		}
@@ -298,7 +298,7 @@ func enumerateReachability(cf *javareach.ClassFile, classPath string, seen map[s
 			continue
 		}
 
-		slog.Debug("found", "dependency", class)
+		slog.Debug(fmt.Sprint("found", "dependency", class))
 		if _, ok := seen[class]; ok {
 			continue
 		}
@@ -306,7 +306,7 @@ func enumerateReachability(cf *javareach.ClassFile, classPath string, seen map[s
 		depcf, err := findClass(classPath, class)
 		if err != nil {
 			// Dependencies can be optional, so this is not a fatal error.
-			slog.Error("failed to find class", "class", class, "from", thisClass, "cp idx", i, "error", err)
+			slog.Error(fmt.Sprint("failed to find class", "class", class, "from", thisClass, "cp idx", i, "error", err))
 			continue
 		}
 
