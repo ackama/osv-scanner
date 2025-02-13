@@ -135,6 +135,15 @@ func removeUntestableLines(t *testing.T, str string) string {
 	return str
 }
 
+func normalizeMemoryAddresses(t *testing.T, str string) string {
+	t.Helper()
+
+	replacer := regexp.MustCompile(`0xc[0-9a-fA-F]+`)
+	str = replacer.ReplaceAllLiteralString(str, "0x<memoryaddress>")
+
+	return str
+}
+
 // normalizeStdStream applies a series of normalizes to the buffer from a std stream like stdout and stderr
 func normalizeStdStream(t *testing.T, std *bytes.Buffer) string {
 	t.Helper()
@@ -147,6 +156,7 @@ func normalizeStdStream(t *testing.T, std *bytes.Buffer) string {
 		normalizeTempDirectory,
 		normalizeUserCacheDirectory,
 		normalizeErrors,
+		normalizeMemoryAddresses,
 		removeUntestableLines,
 	} {
 		str = normalizer(t, str)
