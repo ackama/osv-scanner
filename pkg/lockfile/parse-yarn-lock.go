@@ -3,8 +3,8 @@ package lockfile
 import (
 	"bufio"
 	"fmt"
+	"log/slog"
 	"net/url"
-	"os"
 	"path/filepath"
 	"strings"
 
@@ -161,11 +161,10 @@ func parseYarnPackageGroup(group []string) PackageDetails {
 	resolution := determineYarnPackageResolution(group)
 
 	if version == "" {
-		_, _ = fmt.Fprintf(
-			os.Stderr,
+		slog.Warn(fmt.Sprintf(
 			"Failed to determine version of %s while parsing a yarn.lock - please report this!\n",
 			name,
-		)
+		))
 	}
 
 	return PackageDetails{
