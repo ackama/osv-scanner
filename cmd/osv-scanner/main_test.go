@@ -190,8 +190,6 @@ func testCli(t *testing.T, tc cliTestCase) {
 }
 
 func TestRun(t *testing.T) {
-	t.Parallel()
-
 	tests := []cliTestCase{
 		{
 			name: "",
@@ -423,16 +421,12 @@ func TestRun(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			testCli(t, tt)
 		})
 	}
 }
 
 func TestRunCallAnalysis(t *testing.T) {
-	t.Parallel()
-
 	// Switch to acceptance test if this takes too long, or when we add rust tests
 	// testutility.SkipIfNotAcceptanceTesting(t, "Takes a while to run")
 
@@ -448,16 +442,12 @@ func TestRunCallAnalysis(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			testCli(t, tt)
 		})
 	}
 }
 
 func TestRun_LockfileWithExplicitParseAs(t *testing.T) {
-	t.Parallel()
-
 	tests := []cliTestCase{
 		{
 			name: "unsupported parse-as",
@@ -570,8 +560,6 @@ func TestRun_LockfileWithExplicitParseAs(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			stdout, stderr := runCli(t, tt)
 
 			testutility.NewSnapshot().MatchText(t, stdout)
@@ -584,8 +572,6 @@ func TestRun_LockfileWithExplicitParseAs(t *testing.T) {
 
 // TestRun_GithubActions tests common actions the github actions reusable workflow will run
 func TestRun_GithubActions(t *testing.T) {
-	t.Parallel()
-
 	tests := []cliTestCase{
 		{
 			name: "scanning osv-scanner custom format",
@@ -600,16 +586,12 @@ func TestRun_GithubActions(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			testCli(t, tt)
 		})
 	}
 }
 
 func TestRun_LocalDatabases(t *testing.T) {
-	t.Parallel()
-
 	tests := []cliTestCase{
 		{
 			name: "one specific supported lockfile",
@@ -675,8 +657,6 @@ func TestRun_LocalDatabases(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			if testutility.IsAcceptanceTesting() {
 				testDir := testutility.CreateTestDir(t)
 				old := tt.args
@@ -693,8 +673,6 @@ func TestRun_LocalDatabases(t *testing.T) {
 }
 
 func TestRun_LocalDatabases_AlwaysOffline(t *testing.T) {
-	t.Parallel()
-
 	tests := []cliTestCase{
 		{
 			name: "a bunch of different lockfiles and ecosystem",
@@ -705,8 +683,6 @@ func TestRun_LocalDatabases_AlwaysOffline(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			testDir := testutility.CreateTestDir(t)
 			old := tt.args
 			tt.args = []string{"", "--experimental-local-db-path", testDir}
@@ -721,7 +697,6 @@ func TestRun_LocalDatabases_AlwaysOffline(t *testing.T) {
 }
 
 func TestRun_Licenses(t *testing.T) {
-	t.Parallel()
 	tests := []cliTestCase{
 		{
 			name: "No vulnerabilities with license summary",
@@ -786,16 +761,12 @@ func TestRun_Licenses(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			testCli(t, tt)
 		})
 	}
 }
 
 func TestRun_Docker(t *testing.T) {
-	t.Parallel()
-
 	testutility.SkipIfNotAcceptanceTesting(t, "Takes a long time to pull down images")
 
 	tests := []cliTestCase{
@@ -828,8 +799,6 @@ func TestRun_Docker(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			// Only test on linux, and mac/windows CI/CD does not come with docker preinstalled
 			if runtime.GOOS != "linux" {
 				testutility.Skip(t, "Skipping Docker-based test as only Linux has Docker installed in CI")
@@ -841,8 +810,6 @@ func TestRun_Docker(t *testing.T) {
 }
 
 func TestRun_OCIImage(t *testing.T) {
-	t.Parallel()
-
 	testutility.SkipIfNotAcceptanceTesting(t, "Not consistent on MacOS/Windows")
 
 	tests := []cliTestCase{
@@ -909,8 +876,6 @@ func TestRun_OCIImage(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			// point out that we need the images to be built and saved separately
 			for _, arg := range tt.args {
 				if strings.HasPrefix(arg, "../../internal/image/fixtures/") && strings.HasSuffix(arg, ".tar") {
@@ -927,7 +892,6 @@ func TestRun_OCIImage(t *testing.T) {
 
 // Tests all subcommands here.
 func TestRun_SubCommands(t *testing.T) {
-	t.Parallel()
 	tests := []cliTestCase{
 		// without subcommands
 		{
@@ -951,15 +915,12 @@ func TestRun_SubCommands(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
-
 			testCli(t, tt)
 		})
 	}
 }
 
 func TestRun_InsertDefaultCommand(t *testing.T) {
-	t.Parallel()
 	commands := []*cli.Command{
 		{Name: "default"},
 		{Name: "scan"},
@@ -1026,7 +987,6 @@ func TestRun_InsertDefaultCommand(t *testing.T) {
 }
 
 func TestRun_MavenTransitive(t *testing.T) {
-	t.Parallel()
 	tests := []cliTestCase{
 		{
 			name: "scans transitive dependencies for pom.xml by default",
@@ -1069,14 +1029,12 @@ func TestRun_MavenTransitive(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
 			testCli(t, tt)
 		})
 	}
 }
 
 func TestRun_MoreLockfiles(t *testing.T) {
-	t.Parallel()
 	tests := []cliTestCase{
 		{
 			name: "uv.lock",
@@ -1108,7 +1066,6 @@ func TestRun_MoreLockfiles(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			t.Parallel()
 			testCli(t, tt)
 		})
 	}
