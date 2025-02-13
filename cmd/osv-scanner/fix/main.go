@@ -54,6 +54,9 @@ type osvFixOptions struct {
 	Lockfile    string
 	LockfileRW  lockfile.ReadWriter
 	NoIntroduce bool
+	OutputJSON  bool
+	Stdout      io.Writer
+	Stderr      io.Writer
 }
 
 func Command(stdout, stderr io.Writer) *cli.Command {
@@ -283,20 +286,6 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) error {
 		return errors.New("manifest or lockfile is required")
 	}
 
-	r := new(outputReporter)
-	switch ctx.String("format") {
-	case "json":
-		r.Stdout = stderr
-		r.Stderr = stderr
-		r.OutputResult = func(fo fixOutput) error { return outputJSON(stdout, fo) }
-	case "text":
-		fallthrough
-	default:
-		r.Stdout = stdout
-		r.Stderr = stderr
-		r.OutputResult = func(fo fixOutput) error { return outputText(stdout, fo) }
-	}
-
 	opts := osvFixOptions{
 		Options: remediation.Options{
 			ResolveOpts: resolution.ResolveOpts{
@@ -312,6 +301,9 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) error {
 		Manifest:    ctx.String("manifest"),
 		Lockfile:    ctx.String("lockfile"),
 		NoIntroduce: ctx.Bool("no-introduce"),
+		OutputJSON:  ctx.String("format") == "json",
+		Stdout:      stdout,
+		Stderr:      stderr,
 	}
 
 	system := resolve.UnknownSystem
@@ -431,11 +423,11 @@ func action(ctx *cli.Context, stdout, stderr io.Writer) error {
 
 	switch strategy {
 	case strategyRelax:
-		return autoRelax(ctx.Context, r, opts, maxUpgrades)
+		return autoRelax(ctx.Context, opts, maxUpgrades)
 	case strategyInPlace:
-		return autoInPlace(ctx.Context, r, opts, maxUpgrades)
+		return autoInPlace(ctx.Context, opts, maxUpgrades)
 	case strategyOverride:
-		return autoOverride(ctx.Context, r, opts, maxUpgrades)
+		return autoOverride(ctx.Context, opts, maxUpgrades)
 	default:
 		// The strategy flag should already be validated by this point.
 		panic(fmt.Sprintf("non-interactive mode attempted to run with unhandled strategy: \"%s\"", ctx.String("strategy")))
