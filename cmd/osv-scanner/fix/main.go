@@ -233,7 +233,7 @@ func parseUpgradeConfig(ctx *cli.Context) upgrade.Config {
 	config := upgrade.NewConfig()
 
 	if ctx.IsSet("disallow-major-upgrades") {
-		slog.Warn(fmt.Sprintf("WARNING: `--disallow-major-upgrades` flag is deprecated, use `--upgrade-config minor` instead\n"))
+		slog.Warn("WARNING: `--disallow-major-upgrades` flag is deprecated, use `--upgrade-config minor` instead\n")
 		if ctx.Bool("disallow-major-upgrades") {
 			config.SetDefault(upgrade.Minor)
 		} else {
@@ -241,7 +241,7 @@ func parseUpgradeConfig(ctx *cli.Context) upgrade.Config {
 		}
 	}
 	if ctx.IsSet("disallow-package-upgrades") {
-		slog.Warn(fmt.Sprintf("WARNING: `--disallow-package-upgrades` flag is deprecated, use `--upgrade-config PKG:none` instead\n"))
+		slog.Warn("WARNING: `--disallow-package-upgrades` flag is deprecated, use `--upgrade-config PKG:none` instead\n")
 		for _, pkg := range ctx.StringSlice("disallow-package-upgrades") {
 			config.Set(pkg, upgrade.None)
 		}
