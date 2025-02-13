@@ -125,7 +125,7 @@ func action(context *cli.Context, stdout, stderr io.Writer) error {
 	var callAnalysisStates map[string]bool
 	if context.IsSet("experimental-call-analysis") {
 		callAnalysisStates = helper.CreateCallAnalysisStates([]string{"all"}, context.StringSlice("no-call-analysis"))
-		slog.Info(fmt.Sprintf("Warning: the experimental-call-analysis flag has been replaced. Please use the call-analysis and no-call-analysis flags instead.\n"))
+		slog.Info("Warning: the experimental-call-analysis flag has been replaced. Please use the call-analysis and no-call-analysis flags instead.\n")
 	} else {
 		callAnalysisStates = helper.CreateCallAnalysisStates(context.StringSlice("call-analysis"), context.StringSlice("no-call-analysis"))
 	}
