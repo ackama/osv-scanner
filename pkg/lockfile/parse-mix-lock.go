@@ -3,7 +3,7 @@ package lockfile
 import (
 	"bufio"
 	"fmt"
-	"os"
+	"log/slog"
 	"path/filepath"
 	"strings"
 
@@ -42,8 +42,7 @@ func (e MixLockExtractor) Extract(f DepFile) ([]PackageDetails, error) {
 		})
 
 		if len(fields) < 4 {
-			_, _ = fmt.Fprintf(
-				os.Stderr,
+			slog.Warn(
 				"Found less than four fields when parsing a line that looks like a dependency in a mix.lock - please report this!\n",
 			)
 

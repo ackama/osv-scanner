@@ -3,7 +3,7 @@ package lockfile
 import (
 	"encoding/xml"
 	"fmt"
-	"os"
+	"log/slog"
 	"path/filepath"
 	"strings"
 
@@ -44,13 +44,12 @@ func (mld MavenLockDependency) resolveVersionValue(lockfile MavenLockFile) strin
 		return val
 	}
 
-	fmt.Fprintf(
-		os.Stderr,
+	slog.Warn(fmt.Sprintf(
 		"Failed to resolve version of %s: property \"%s\" could not be found for \"%s\"\n",
 		mld.GroupID+":"+mld.ArtifactID,
 		results[1],
 		lockfile.GroupID+":"+lockfile.ArtifactID,
-	)
+	))
 
 	return "0"
 }
