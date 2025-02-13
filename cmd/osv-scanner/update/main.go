@@ -40,9 +40,7 @@ func Command() *cli.Command {
 				Usage: "whether to ignore development dependencies for updates",
 			},
 		},
-		Action: func(ctx *cli.Context) error {
-			return action(ctx)
-		},
+		Action: action,
 	}
 }
 
