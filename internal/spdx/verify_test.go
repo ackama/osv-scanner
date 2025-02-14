@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_unrecognized(t *testing.T) {
+func TestUnrecognized(t *testing.T) {
 	t.Parallel()
 	tests := []struct {
 		name     string
