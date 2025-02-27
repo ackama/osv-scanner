@@ -966,9 +966,6 @@ failed to write output: invalid verbosity level "unknown" - must be one of: erro
 ---
 
 [Test_run/json_output - 1]
-Scanning dir ./fixtures/locks-many/composer.lock
-Scanned <rootdir>/fixtures/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/fixtures/locks-many/osv-scanner.toml
 {
   "results": [],
   "experimental_config": {
@@ -982,6 +979,9 @@ Loaded filter from: <rootdir>/fixtures/locks-many/osv-scanner.toml
 ---
 
 [Test_run/json_output - 2]
+Scanning dir ./fixtures/locks-many/composer.lock
+Scanned <rootdir>/fixtures/locks-many/composer.lock file and found 1 package
+Loaded filter from: <rootdir>/fixtures/locks-many/osv-scanner.toml
 
 ---
 
@@ -1460,8 +1460,6 @@ Scanned <rootdir>/fixtures/locks-insecure/osv-scanner-flutter-deps.json file as 
 ---
 
 [Test_run_Licenses/Licenses_in_summary_mode_json - 1]
-Scanning dir ./fixtures/locks-licenses/package-lock.json
-Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 {
   "results": [],
   "experimental_config": {
@@ -1489,6 +1487,8 @@ Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 pac
 ---
 
 [Test_run_Licenses/Licenses_in_summary_mode_json - 2]
+Scanning dir ./fixtures/locks-licenses/package-lock.json
+Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 
 ---
 
@@ -1546,8 +1546,6 @@ license MIT WITH (Bison-exception-2.2 AND somethingelse) for package npm/ms/2.1.
 ---
 
 [Test_run_Licenses/No_license_violations_and_show-all-packages_in_json - 1]
-Scanning dir ./fixtures/locks-licenses/package-lock.json
-Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 {
   "results": [
     {
@@ -1627,6 +1625,8 @@ Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 pac
 ---
 
 [Test_run_Licenses/No_license_violations_and_show-all-packages_in_json - 2]
+Scanning dir ./fixtures/locks-licenses/package-lock.json
+Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 
 ---
 
@@ -1681,8 +1681,6 @@ Filtered 2 vulnerabilities from output
 ---
 
 [Test_run_Licenses/Show_all_Packages_with_license_summary_in_json - 1]
-Scanning dir ./fixtures/locks-licenses/package-lock.json
-Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 {
   "results": [
     {
@@ -1759,6 +1757,8 @@ Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 pac
 ---
 
 [Test_run_Licenses/Show_all_Packages_with_license_summary_in_json - 2]
+Scanning dir ./fixtures/locks-licenses/package-lock.json
+Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 
 ---
 
@@ -1821,8 +1821,6 @@ overriding license for package Packagist/league/flysystem/1.0.8 with 0BSD
 ---
 
 [Test_run_Licenses/Some_packages_with_license_violations_and_show-all-packages_in_json - 1]
-Scanning dir ./fixtures/locks-licenses/package-lock.json
-Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 {
   "results": [
     {
@@ -1904,12 +1902,12 @@ Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 pac
 ---
 
 [Test_run_Licenses/Some_packages_with_license_violations_and_show-all-packages_in_json - 2]
+Scanning dir ./fixtures/locks-licenses/package-lock.json
+Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 
 ---
 
 [Test_run_Licenses/Some_packages_with_license_violations_in_json - 1]
-Scanning dir ./fixtures/locks-licenses/package-lock.json
-Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 {
   "results": [
     {
@@ -1961,6 +1959,8 @@ Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 pac
 ---
 
 [Test_run_Licenses/Some_packages_with_license_violations_in_json - 2]
+Scanning dir ./fixtures/locks-licenses/package-lock.json
+Scanned <rootdir>/fixtures/locks-licenses/package-lock.json file and found 4 packages
 
 ---
 
@@ -2752,10 +2752,6 @@ No issues found
 ---
 
 [Test_run_LocalDatabases/output_with_json - 1]
-Scanning dir ./fixtures/locks-many/composer.lock
-Scanned <rootdir>/fixtures/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/fixtures/locks-many/osv-scanner.toml
-Loaded Packagist local db from <tempdir>/osv-scanner/Packagist/all.zip
 {
   "results": [],
   "experimental_config": {
@@ -2769,14 +2765,14 @@ Loaded Packagist local db from <tempdir>/osv-scanner/Packagist/all.zip
 ---
 
 [Test_run_LocalDatabases/output_with_json - 2]
-
----
-
-[Test_run_LocalDatabases/output_with_json - 3]
 Scanning dir ./fixtures/locks-many/composer.lock
 Scanned <rootdir>/fixtures/locks-many/composer.lock file and found 1 package
 Loaded filter from: <rootdir>/fixtures/locks-many/osv-scanner.toml
 Loaded Packagist local db from <tempdir>/osv-scanner/Packagist/all.zip
+
+---
+
+[Test_run_LocalDatabases/output_with_json - 3]
 {
   "results": [],
   "experimental_config": {
@@ -2790,6 +2786,10 @@ Loaded Packagist local db from <tempdir>/osv-scanner/Packagist/all.zip
 ---
 
 [Test_run_LocalDatabases/output_with_json - 4]
+Scanning dir ./fixtures/locks-many/composer.lock
+Scanned <rootdir>/fixtures/locks-many/composer.lock file and found 1 package
+Loaded filter from: <rootdir>/fixtures/locks-many/osv-scanner.toml
+Loaded Packagist local db from <tempdir>/osv-scanner/Packagist/all.zip
 
 ---
 
@@ -4304,7 +4304,6 @@ Warning: `scan` exists as both a subcommand of OSV-Scanner and as a file on the 
 
 [Test_run_OCIImageAllPackagesJSON/Scanning_python_image_with_some_packages - 2]
 Warning: `scan` exists as both a subcommand of OSV-Scanner and as a file on the filesystem. `scan` is assumed to be a subcommand here. If you intended for `scan` to be an argument to `scan`, you must specify `scan scan` in your command line.
-Scanning local image tarball "../../internal/image/fixtures/test-python-full.tar"
 
 ---
 
@@ -4604,7 +4603,6 @@ Scanning local image tarball "../../internal/image/fixtures/test-python-full.tar
 
 [Test_run_OCIImageAllPackagesJSON/scanning_image_with_go_binary - 2]
 Warning: `scan` exists as both a subcommand of OSV-Scanner and as a file on the filesystem. `scan` is assumed to be a subcommand here. If you intended for `scan` to be an argument to `scan`, you must specify `scan scan` in your command line.
-Scanning local image tarball "../../internal/image/fixtures/test-go-binary.tar"
 
 ---
 
@@ -4885,8 +4883,10 @@ Scanning local image tarball "../../internal/image/fixtures/test-go-binary.tar"
 
 [Test_run_OCIImageAllPackagesJSON/scanning_node_modules_using_npm_with_some_packages - 2]
 Warning: `scan` exists as both a subcommand of OSV-Scanner and as a file on the filesystem. `scan` is assumed to be a subcommand here. If you intended for `scan` to be an argument to `scan`, you must specify `scan scan` in your command line.
+Scanning local image tarball "../../internal/image/fixtures/test-python-full.tar"
 Scanning local image tarball "../../internal/image/fixtures/test-node_modules-npm-full.tar"
-
+Scanning local image tarball "../../internal/image/fixtures/test-go-binary.tar"
+<removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed><removed>
 ---
 
 [Test_run_SubCommands/scan_with_a_flag - 1]
