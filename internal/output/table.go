@@ -1,6 +1,7 @@
 package output
 
 import (
+	"cmp"
 	"fmt"
 	"io"
 	"path/filepath"
@@ -245,6 +246,25 @@ func tableBuilderInner(vulnResult *models.VulnerabilityResults, calledVulns bool
 	workingDir := mustGetWorkingDirectory()
 
 	for _, sourceRes := range vulnResult.Results {
+		slices.SortFunc(sourceRes.Packages, func(a, b models.PackageVulns) int {
+			if r := cmp.Compare(a.Package.Name, b.Package.Name); r != 0 {
+				return r
+			}
+
+			aIsDevGroup := depgroups.IsDevGroup(ecosystem.MustParse(a.Package.Ecosystem).Ecosystem, a.DepGroups)
+			bIsDevGroup := depgroups.IsDevGroup(ecosystem.MustParse(b.Package.Ecosystem).Ecosystem, b.DepGroups)
+
+			if aIsDevGroup == bIsDevGroup {
+				return 0
+			}
+
+			if aIsDevGroup {
+				return 1
+			}
+
+			return -1
+		})
+
 		for _, pkg := range sourceRes.Packages {
 			source := sourceRes.Source
 			sourcePath, err := filepath.Rel(workingDir, source.Path)
