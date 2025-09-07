@@ -392,7 +392,7 @@ func (db *ZipDB) loadFromDir(p string) error {
 			return nil
 		}
 
-		var pa osvschema.Vulnerability
+		var pa VulnerabilityLite
 		if err := json.Unmarshal(content, &pa); err != nil {
 			errored = true
 			_, _ = fmt.Fprintf(os.Stderr, "%s is not a valid JSON file: %v\n", info.Name(), err)
@@ -400,7 +400,7 @@ func (db *ZipDB) loadFromDir(p string) error {
 			return nil
 		}
 
-		db.addVulnerability(pa)
+		db.addVulnerability(pa.ToVulnerability())
 
 		return nil
 	})
