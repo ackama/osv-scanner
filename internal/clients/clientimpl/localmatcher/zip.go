@@ -11,9 +11,11 @@ import (
 	"fmt"
 	"hash/crc32"
 	"io"
+	"io/fs"
 	"net/http"
 	"os"
 	"path"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -294,6 +296,26 @@ func (db *ZipDB) addVulnerability(vulnerability osvschema.Vulnerability) {
 	}
 }
 
+func (db *ZipDB) writeZipFile(zipFile *zip.File, p string) error {
+	dst, err := os.OpenFile(filepath.Join(p, zipFile.Name), os.O_WRONLY|os.O_CREATE|os.O_TRUNC, zipFile.Mode())
+	if err != nil {
+		return err
+	}
+
+	defer dst.Close()
+
+	z, err := zipFile.Open()
+	if err != nil {
+		return err
+	}
+
+	defer z.Close()
+
+	_, err = io.Copy(dst, z)
+
+	return err
+}
+
 // load fetches a zip archive of the OSV database and loads known vulnerabilities
 // from it (which are assumed to be in json files following the OSV spec).
 //
@@ -309,6 +331,13 @@ func (db *ZipDB) load(ctx context.Context) error {
 		return err
 	}
 
+	p := strings.TrimSuffix(db.StoredAt, "all.zip") + "extracted"
+
+	err = os.MkdirAll(p, 0755)
+
+	if err != nil {
+		return err
+	}
 	zipReader, err := zip.NewReader(bytes.NewReader(body), int64(len(body)))
 	if err != nil {
 		return fmt.Errorf("could not read OSV database archive: %w", err)
@@ -320,7 +349,68 @@ func (db *ZipDB) load(ctx context.Context) error {
 			continue
 		}
 
-		db.loadZipFile(zipFile)
+		err = db.writeZipFile(zipFile, p)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	err = db.loadFromDir(p)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (db *ZipDB) loadFromDir(p string) error {
+	errored := false
+
+	err := filepath.Walk(p, func(path string, info fs.FileInfo, err error) error {
+		if info == nil {
+			return err
+		}
+
+		if err != nil {
+			errored = true
+			_, _ = fmt.Fprintf(os.Stderr, "\n    %v", err)
+
+			return nil
+		}
+
+		if !strings.HasSuffix(info.Name(), ".json") {
+			return nil
+		}
+
+		content, err := os.ReadFile(path)
+		if err != nil {
+			errored = true
+			_, _ = fmt.Fprintf(os.Stderr, "\n%v", err)
+
+			return nil
+		}
+
+		var pa osvschema.Vulnerability
+		if err := json.Unmarshal(content, &pa); err != nil {
+			errored = true
+			_, _ = fmt.Fprintf(os.Stderr, "%s is not a valid JSON file: %v\n", info.Name(), err)
+
+			return nil
+		}
+
+		db.addVulnerability(pa)
+
+		return nil
+	})
+
+	if errored {
+		_, _ = fmt.Fprintf(os.Stderr, "\n")
+	}
+
+	if err != nil {
+		return fmt.Errorf("could not read OSV database directory: %w", err)
 	}
 
 	return nil
