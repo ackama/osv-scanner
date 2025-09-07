@@ -32,7 +32,7 @@ type ZipDB struct {
 	// the path to the zip archive on disk
 	StoredAt string
 	// the vulnerabilities that are loaded into this database
-	Vulnerabilities []osvschema.Vulnerability
+	Vulnerabilities map[string][]osvschema.Vulnerability
 	// User agent to query with
 	UserAgent string
 }
@@ -169,7 +169,20 @@ func (db *ZipDB) loadZipFile(zipFile *zip.File) {
 		return
 	}
 
-	db.Vulnerabilities = append(db.Vulnerabilities, vulnerability)
+	db.addVulnerability(vulnerability)
+}
+
+func (db *ZipDB) addVulnerability(vulnerability osvschema.Vulnerability) {
+	for _, affected := range vulnerability.Affected {
+		hash := string(affected.Package.Ecosystem) + "-" + affected.Package.Name
+		vs := db.Vulnerabilities[hash]
+
+		if vs == nil {
+			vs = []osvschema.Vulnerability{}
+		}
+
+		db.Vulnerabilities[hash] = append(vs, vulnerability)
+	}
 }
 
 // load fetches a zip archive of the OSV database and loads known vulnerabilities
@@ -179,7 +192,7 @@ func (db *ZipDB) loadZipFile(zipFile *zip.File) {
 // so that a new version of the archive is only downloaded if it has been
 // modified, per HTTP caching standards.
 func (db *ZipDB) load(ctx context.Context) error {
-	db.Vulnerabilities = []osvschema.Vulnerability{}
+	db.Vulnerabilities = make(map[string][]osvschema.Vulnerability)
 
 	body, err := db.fetchZip(ctx)
 
@@ -217,6 +230,23 @@ func NewZippedDB(ctx context.Context, dbBasePath, name, url, userAgent string, o
 	}
 
 	return db, nil
+}
+
+func (db *ZipDB) VulnerabilitiesAffectingPackage(pkg imodels.PackageInfo) []*osvschema.Vulnerability {
+	var vulnerabilities []*osvschema.Vulnerability
+
+	// todo: need to confirm this actually will match the hash we generate from the osv
+	hash := string(pkg.Ecosystem().String()) + "-" + pkg.Name()
+
+	if vns, ok := db.Vulnerabilities[hash]; ok {
+		for _, vulnerability := range vns {
+			if vulnerability.Withdrawn.IsZero() && vulns.IsAffected(vulnerability, pkg) && !vulns.Include(vulnerabilities, vulnerability) {
+				vulnerabilities = append(vulnerabilities, &vulnerability)
+			}
+		}
+	}
+
+	return vulnerabilities
 }
 
 // TODO: Move this to another file.
