@@ -24,6 +24,24 @@ import (
 
 const userAgent = "osv-scanner_test/" + version.OSVVersion
 
+func vulnsToSlice(db *localmatcher.ZipDB) []osvschema.Vulnerability {
+	var vulnerabilities []osvschema.Vulnerability
+	ids := make(map[string]struct{})
+
+	for _, vns := range db.Vulnerabilities {
+		for _, vulnerability := range vns {
+			if _, ok := ids[vulnerability.ID]; ok {
+				continue
+			}
+
+				vulnerabilities = append(vulnerabilities, vulnerability)
+				ids[vulnerability.ID] = struct{}{}
+		}
+	}
+
+	return vulnerabilities
+}
+
 func expectDBToHaveOSVs(
 	t *testing.T,
 	db *localmatcher.ZipDB,
@@ -31,7 +49,7 @@ func expectDBToHaveOSVs(
 ) {
 	t.Helper()
 
-	vulns := db.Vulnerabilities
+	vulns := vulnsToSlice(db)
 
 	sort.Slice(vulns, func(i, j int) bool {
 		return vulns[i].ID < vulns[j].ID
