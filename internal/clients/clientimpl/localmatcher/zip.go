@@ -15,6 +15,7 @@ import (
 	"os"
 	"path"
 	"strings"
+	"time"
 
 	"github.com/google/osv-scanner/v2/internal/cmdlogger"
 	"github.com/google/osv-scanner/v2/internal/imodels"
@@ -143,6 +144,114 @@ func (db *ZipDB) fetchZip(ctx context.Context) ([]byte, error) {
 	return body, nil
 }
 
+type VulnerabilityLite struct {
+	SchemaVersion    string                 `json:"schema_version,omitempty"    yaml:"schema_version,omitempty"`
+	ID               string                 `json:"id"                          yaml:"id"`
+	Modified         time.Time              `json:"modified"                    yaml:"modified"`
+	Published        time.Time              `json:"published,omitempty"         yaml:"published,omitempty"`
+	Withdrawn        time.Time              `json:"withdrawn,omitempty"         yaml:"withdrawn,omitempty"`
+	Aliases          []string               `json:"aliases,omitempty"           yaml:"aliases,omitempty"`
+	Related          []string               `json:"related,omitempty"           yaml:"related,omitempty"`
+	Upstream         []string               `json:"upstream,omitempty"          yaml:"upstream,omitempty"`
+	Summary          string                 `json:"summary,omitempty"           yaml:"summary,omitempty"`
+	Details          string                 `json:"details,omitempty"           yaml:"details,omitempty"`
+	Severity         []osvschema.Severity   `json:"severity,omitempty"          yaml:"severity,omitempty"`
+	Affected         []AffectedLite         `json:"affected,omitempty"          yaml:"affected,omitempty"`
+	References       []osvschema.Reference  `json:"references,omitempty"        yaml:"references,omitempty"`
+	Credits          []osvschema.Credit     `json:"credits,omitempty"           yaml:"credits,omitempty"`
+	DatabaseSpecific map[string]interface{} `json:"-" yaml:"database_specific,omitempty"`
+}
+
+type AffectedLite struct {
+	Package           osvschema.Package      `json:"package,omitempty"            yaml:"package,omitempty"`
+	Severity          []osvschema.Severity   `json:"severity,omitempty"           yaml:"severity,omitempty"`
+	Ranges            []osvschema.Range      `json:"ranges,omitempty"             yaml:"ranges,omitempty"`
+	Versions          []string               `json:"versions,omitempty"           yaml:"versions,omitempty"`
+	DatabaseSpecific  map[string]interface{} `json:"-" yaml:"database_specific,omitempty"`
+	EcosystemSpecific map[string]interface{} `json:"-" yaml:"ecosystem_specific,omitempty"`
+}
+
+// MarshalJSON implements the json.Marshaler interface.
+//
+// This method ensures Package is only present if it is not equal to the zero value.
+// This is achieved by embedding the Affected struct with a pointer to Package used
+// to populate the "package" key in the JSON object.
+func (a AffectedLite) MarshalJSON() ([]byte, error) {
+	type rawAffected AffectedLite // alias Affected to avoid recursion during Marshal
+	type wrapper struct {
+		Package *osvschema.Package `json:"package,omitempty"`
+		rawAffected
+	}
+	raw := wrapper{rawAffected: rawAffected(a)}
+	if a.Package == (osvschema.Package{}) {
+		raw.Package = nil
+	} else {
+		raw.Package = &(a.Package)
+	}
+
+	return json.Marshal(raw)
+}
+
+func (a AffectedLite) ToAffected() osvschema.Affected {
+	return osvschema.Affected{
+		Package:           a.Package,
+		Severity:          a.Severity,
+		Ranges:            a.Ranges,
+		Versions:          a.Versions,
+		DatabaseSpecific:  a.DatabaseSpecific,
+		EcosystemSpecific: a.EcosystemSpecific,
+	}
+}
+
+// MarshalJSON implements the json.Marshaler interface.
+//
+// This method ensures all times are formatted correctly according to the schema.
+func (v VulnerabilityLite) MarshalJSON() ([]byte, error) {
+	type rawVulnerability VulnerabilityLite // alias Vulnerability to avoid recursion during Marshal
+	type wrapper struct {
+		Modified  string `json:"modified"`
+		Published string `json:"published,omitempty"`
+		Withdrawn string `json:"withdrawn,omitempty"`
+		rawVulnerability
+	}
+	raw := wrapper{rawVulnerability: rawVulnerability(v)}
+	raw.Modified = v.Modified.UTC().Format(time.RFC3339)
+	if !v.Published.IsZero() {
+		raw.Published = v.Published.UTC().Format(time.RFC3339)
+	}
+	if !v.Withdrawn.IsZero() {
+		raw.Withdrawn = v.Withdrawn.UTC().Format(time.RFC3339)
+	}
+
+	return json.Marshal(raw)
+}
+
+func (v VulnerabilityLite) ToVulnerability() osvschema.Vulnerability {
+	affected := make([]osvschema.Affected, len(v.Affected))
+
+	for i := range v.Affected {
+		affected[i] = v.Affected[i].ToAffected()
+	}
+
+	return osvschema.Vulnerability{
+		SchemaVersion:    v.SchemaVersion,
+		ID:               v.ID,
+		Modified:         v.Modified,
+		Published:        v.Published,
+		Withdrawn:        v.Withdrawn,
+		Aliases:          v.Aliases,
+		Related:          v.Related,
+		Upstream:         v.Upstream,
+		Summary:          v.Summary,
+		Details:          v.Details,
+		Severity:         v.Severity,
+		Affected:         affected,
+		References:       v.References,
+		Credits:          v.Credits,
+		DatabaseSpecific: v.DatabaseSpecific,
+	}
+}
+
 // Loads the given zip file into the database as an OSV.
 // It is assumed that the file is JSON and in the working directory of the db
 func (db *ZipDB) loadZipFile(zipFile *zip.File) {
@@ -161,7 +270,7 @@ func (db *ZipDB) loadZipFile(zipFile *zip.File) {
 		return
 	}
 
-	var vulnerability osvschema.Vulnerability
+	var vulnerability VulnerabilityLite
 
 	if err := json.Unmarshal(content, &vulnerability); err != nil {
 		cmdlogger.Warnf("%s is not a valid JSON file: %v", zipFile.Name, err)
@@ -169,7 +278,7 @@ func (db *ZipDB) loadZipFile(zipFile *zip.File) {
 		return
 	}
 
-	db.addVulnerability(vulnerability)
+	db.addVulnerability(vulnerability.ToVulnerability())
 }
 
 func (db *ZipDB) addVulnerability(vulnerability osvschema.Vulnerability) {
