@@ -1162,7 +1162,7 @@ OPTIONS:
    --experimental-plugins string [ --experimental-plugins string ]                  list of specific plugins and presets of plugins to use (default: "lockfile", "sbom", "directory")
    --experimental-disable-plugins string [ --experimental-disable-plugins string ]  list of specific plugins and presets of plugins to not use
    --experimental-no-default-plugins                                                disable default plugins, instead using only those enabled by --experimental-plugins
-   --experimental-update-config-ignores                                             update config file(s) to ignore all found vulnerabilities
+   --experimental-update-config-ignores string                                      update config file(s) to ignore vulnerabilities - must be one of: none, unused, or all
    --help, -h                                                                       show help
 
 ---
@@ -5766,7 +5766,7 @@ Total 5 packages affected by 22 known vulnerabilities (1 Critical, 9 High, 10 Me
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep - 1]
+[TestCommand_UpdateConfigIgnores_All/deep - 1]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -5834,11 +5834,11 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep - 2]
+[TestCommand_UpdateConfigIgnores_All/deep - 2]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep - 3]
+[TestCommand_UpdateConfigIgnores_All/deep - 3]
 [[IgnoredVulns]]
 id = "GHSA-whgm-jr23-g3j9"
 
@@ -5847,12 +5847,12 @@ id = "GHSA-wx95-c6cv-8532"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep - 4]
+[TestCommand_UpdateConfigIgnores_All/deep - 4]
 GoVersionOverride = "1.20.0"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep - 5]
+[TestCommand_UpdateConfigIgnores_All/deep - 5]
 [[IgnoredVulns]]
 id = "GHSA-2g4f-4pwh-qvx6"
 
@@ -5864,7 +5864,7 @@ id = "GHSA-whgm-jr23-g3j9"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep - 6]
+[TestCommand_UpdateConfigIgnores_All/deep - 6]
 [[IgnoredVulns]]
 id = "GHSA-2g4f-4pwh-qvx6"
 
@@ -5876,7 +5876,7 @@ id = "GHSA-whgm-jr23-g3j9"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep - 7]
+[TestCommand_UpdateConfigIgnores_All/deep - 7]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -5901,11 +5901,11 @@ No issues found
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep - 8]
+[TestCommand_UpdateConfigIgnores_All/deep - 8]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_no_configs - 1]
+[TestCommand_UpdateConfigIgnores_All/deep_with_no_configs - 1]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -5971,28 +5971,28 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_no_configs - 2]
+[TestCommand_UpdateConfigIgnores_All/deep_with_no_configs - 2]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_no_configs - 3]
+[TestCommand_UpdateConfigIgnores_All/deep_with_no_configs - 3]
 (does not exist)
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_no_configs - 4]
+[TestCommand_UpdateConfigIgnores_All/deep_with_no_configs - 4]
 GoVersionOverride = "1.20.0"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_no_configs - 5]
+[TestCommand_UpdateConfigIgnores_All/deep_with_no_configs - 5]
 (does not exist)
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_no_configs - 6]
+[TestCommand_UpdateConfigIgnores_All/deep_with_no_configs - 6]
 (does not exist)
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_no_configs - 7]
+[TestCommand_UpdateConfigIgnores_All/deep_with_no_configs - 7]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6058,11 +6058,11 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_no_configs - 8]
+[TestCommand_UpdateConfigIgnores_All/deep_with_no_configs - 8]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_removed_config - 1]
+[TestCommand_UpdateConfigIgnores_All/deep_with_removed_config - 1]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6131,11 +6131,11 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_removed_config - 2]
+[TestCommand_UpdateConfigIgnores_All/deep_with_removed_config - 2]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_removed_config - 3]
+[TestCommand_UpdateConfigIgnores_All/deep_with_removed_config - 3]
 [[IgnoredVulns]]
 id = "GHSA-whgm-jr23-g3j9"
 
@@ -6144,16 +6144,16 @@ id = "GHSA-wx95-c6cv-8532"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_removed_config - 4]
+[TestCommand_UpdateConfigIgnores_All/deep_with_removed_config - 4]
 GoVersionOverride = "1.20.0"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_removed_config - 5]
+[TestCommand_UpdateConfigIgnores_All/deep_with_removed_config - 5]
 (does not exist)
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_removed_config - 6]
+[TestCommand_UpdateConfigIgnores_All/deep_with_removed_config - 6]
 [[IgnoredVulns]]
 id = "GHSA-2g4f-4pwh-qvx6"
 
@@ -6165,7 +6165,7 @@ id = "GHSA-whgm-jr23-g3j9"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_removed_config - 7]
+[TestCommand_UpdateConfigIgnores_All/deep_with_removed_config - 7]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6206,11 +6206,11 @@ lockfile:<tempdir>/nested-1/package-lock.json: found 3 packages with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/deep_with_removed_config - 8]
+[TestCommand_UpdateConfigIgnores_All/deep_with_removed_config - 8]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_deep - 1]
+[TestCommand_UpdateConfigIgnores_All/global_config_deep - 1]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6276,15 +6276,15 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_deep - 2]
+[TestCommand_UpdateConfigIgnores_All/global_config_deep - 2]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_deep - 3]
+[TestCommand_UpdateConfigIgnores_All/global_config_deep - 3]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_deep - 4]
+[TestCommand_UpdateConfigIgnores_All/global_config_deep - 4]
 GoVersionOverride = "1.20.0"
 
 [[IgnoredVulns]]
@@ -6301,14 +6301,14 @@ id = "GHSA-wx95-c6cv-8532"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_deep - 5]
+[TestCommand_UpdateConfigIgnores_All/global_config_deep - 5]
 [[IgnoredVulns]]
 id = "CVE-2021-23424"
 reason = "Test manifest file (package-lock.json)"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_deep - 6]
+[TestCommand_UpdateConfigIgnores_All/global_config_deep - 6]
 [[IgnoredVulns]]
 id = "GHSA-2g4f-4pwh-qvx6"
 
@@ -6317,7 +6317,7 @@ id = "GHSA-2g4f-4pwh-qvx6"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_deep - 7]
+[TestCommand_UpdateConfigIgnores_All/global_config_deep - 7]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6339,11 +6339,11 @@ No issues found
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_deep - 8]
+[TestCommand_UpdateConfigIgnores_All/global_config_deep - 8]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_shallow - 1]
+[TestCommand_UpdateConfigIgnores_All/global_config_shallow - 1]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6375,15 +6375,15 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_shallow - 2]
+[TestCommand_UpdateConfigIgnores_All/global_config_shallow - 2]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_shallow - 3]
+[TestCommand_UpdateConfigIgnores_All/global_config_shallow - 3]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_shallow - 4]
+[TestCommand_UpdateConfigIgnores_All/global_config_shallow - 4]
 GoVersionOverride = "1.20.0"
 
 [[IgnoredVulns]]
@@ -6394,14 +6394,14 @@ id = "GHSA-wx95-c6cv-8532"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_shallow - 5]
+[TestCommand_UpdateConfigIgnores_All/global_config_shallow - 5]
 [[IgnoredVulns]]
 id = "CVE-2021-23424"
 reason = "Test manifest file (package-lock.json)"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_shallow - 6]
+[TestCommand_UpdateConfigIgnores_All/global_config_shallow - 6]
 [[IgnoredVulns]]
 id = "GHSA-2g4f-4pwh-qvx6"
 
@@ -6410,7 +6410,7 @@ id = "GHSA-2g4f-4pwh-qvx6"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_shallow - 7]
+[TestCommand_UpdateConfigIgnores_All/global_config_shallow - 7]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6422,11 +6422,11 @@ No issues found
 
 ---
 
-[TestCommand_UpdateConfigIgnores/global_config_shallow - 8]
+[TestCommand_UpdateConfigIgnores_All/global_config_shallow - 8]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow - 1]
+[TestCommand_UpdateConfigIgnores_All/shallow - 1]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6459,11 +6459,11 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow - 2]
+[TestCommand_UpdateConfigIgnores_All/shallow - 2]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow - 3]
+[TestCommand_UpdateConfigIgnores_All/shallow - 3]
 [[IgnoredVulns]]
 id = "GHSA-whgm-jr23-g3j9"
 
@@ -6472,19 +6472,19 @@ id = "GHSA-wx95-c6cv-8532"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow - 4]
+[TestCommand_UpdateConfigIgnores_All/shallow - 4]
 GoVersionOverride = "1.20.0"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow - 5]
+[TestCommand_UpdateConfigIgnores_All/shallow - 5]
 [[IgnoredVulns]]
 id = "CVE-2021-23424"
 reason = "Test manifest file (package-lock.json)"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow - 6]
+[TestCommand_UpdateConfigIgnores_All/shallow - 6]
 [[IgnoredVulns]]
 id = "GHSA-2g4f-4pwh-qvx6"
 
@@ -6493,7 +6493,7 @@ id = "GHSA-2g4f-4pwh-qvx6"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow - 7]
+[TestCommand_UpdateConfigIgnores_All/shallow - 7]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6506,11 +6506,11 @@ No issues found
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow - 8]
+[TestCommand_UpdateConfigIgnores_All/shallow - 8]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow_with_removed_config - 1]
+[TestCommand_UpdateConfigIgnores_All/shallow_with_removed_config - 1]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6542,27 +6542,27 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow_with_removed_config - 2]
+[TestCommand_UpdateConfigIgnores_All/shallow_with_removed_config - 2]
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow_with_removed_config - 3]
+[TestCommand_UpdateConfigIgnores_All/shallow_with_removed_config - 3]
 (does not exist)
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow_with_removed_config - 4]
+[TestCommand_UpdateConfigIgnores_All/shallow_with_removed_config - 4]
 GoVersionOverride = "1.20.0"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow_with_removed_config - 5]
+[TestCommand_UpdateConfigIgnores_All/shallow_with_removed_config - 5]
 [[IgnoredVulns]]
 id = "CVE-2021-23424"
 reason = "Test manifest file (package-lock.json)"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow_with_removed_config - 6]
+[TestCommand_UpdateConfigIgnores_All/shallow_with_removed_config - 6]
 [[IgnoredVulns]]
 id = "GHSA-2g4f-4pwh-qvx6"
 
@@ -6571,7 +6571,7 @@ id = "GHSA-2g4f-4pwh-qvx6"
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow_with_removed_config - 7]
+[TestCommand_UpdateConfigIgnores_All/shallow_with_removed_config - 7]
 Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
@@ -6603,7 +6603,7 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 
 ---
 
-[TestCommand_UpdateConfigIgnores/shallow_with_removed_config - 8]
+[TestCommand_UpdateConfigIgnores_All/shallow_with_removed_config - 8]
 
 ---
 
