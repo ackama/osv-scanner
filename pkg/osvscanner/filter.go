@@ -12,7 +12,7 @@ func filterResults(vulnResults *models.VulnerabilityResults, configManager *conf
 	removedCount := 0
 	newResults := []models.PackageSource{} // Want 0 vulnerabilities to show in JSON as an empty list, not null.
 	for _, pkgSrc := range vulnResults.Results {
-		configToUse := configManager.Get(pkgSrc.Source.Path)
+		configToUse := configManager.Get(pkgSrc.Source.Path, "filterResults#15")
 		var newPackages []models.PackageVulns
 		for _, pkgVulns := range pkgSrc.Packages {
 			newVulns := filterPackageVulns(pkgVulns, configToUse)

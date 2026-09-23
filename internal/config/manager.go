@@ -34,7 +34,7 @@ func (m *Manager) UseOverride(configPath string) error {
 }
 
 // Get returns the appropriate config to use based on the targetPath
-func (m *Manager) Get(targetPath string) Config {
+func (m *Manager) Get(targetPath string, debug string) Config {
 	if m.OverrideConfig != nil {
 		return *m.OverrideConfig
 	}
@@ -54,7 +54,7 @@ func (m *Manager) Get(targetPath string) Config {
 
 	config, configErr := tryLoadConfig(configPath)
 	if configErr == nil {
-		cmdlogger.Infof("Loaded filter from: %s", config.LoadPath)
+		cmdlogger.Infof("Loaded filter from: %s (%s)", config.LoadPath, debug)
 	} else {
 		// anything other than the config file not existing is most likely due to an invalid config file
 		if !errors.Is(configErr, os.ErrNotExist) {

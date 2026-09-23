@@ -344,7 +344,7 @@ func updateConfigs(vulnResults *models.VulnerabilityResults, configManager *conf
 	configPaths := make(map[string]config.Config)
 
 	for _, pkgSrc := range vulnResults.Results {
-		c := configManager.Get(pkgSrc.Source.Path)
+		c := configManager.Get(pkgSrc.Source.Path, "updateConfigs#347")
 
 		// skip the default config
 		if c.LoadPath == "" {
@@ -469,7 +469,7 @@ func filterAndOverrideGoVersion(scanResults *results.ScanResults) {
 			// not the actual toolchain version used to build/run, which can lead to false positives.
 			// We still want to scan binary stdlib versions as they represent the actual toolchain used.
 			if slices.Contains(pkg.Plugins, gomod.Name) {
-				configToUse := scanResults.ConfigManager.Get(imodels.Location(pkg))
+				configToUse := scanResults.ConfigManager.Get(imodels.Location(pkg), "filterAndOverrideGoVersion#472")
 
 				return !configToUse.ScanGoModVersion
 			}
@@ -481,7 +481,7 @@ func filterAndOverrideGoVersion(scanResults *results.ScanResults) {
 	// Override versions for remaining inventory packages
 	for i, pkg := range scanResults.Inventory.Packages {
 		if imodels.Name(pkg) == "stdlib" && imodels.Ecosystem(pkg).Ecosystem == osvconstants.EcosystemGo {
-			configToUse := scanResults.ConfigManager.Get(imodels.Location(pkg))
+			configToUse := scanResults.ConfigManager.Get(imodels.Location(pkg), "filterAndOverrideGoVersion#484")
 			if configToUse.GoVersionOverride != "" {
 				scanResults.Inventory.Packages[i].Version = configToUse.GoVersionOverride
 			}

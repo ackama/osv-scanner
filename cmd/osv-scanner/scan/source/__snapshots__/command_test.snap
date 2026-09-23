@@ -27,7 +27,7 @@ No issues found
 [TestCommand/Empty_cyclonedx_1.4_output - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 ---
 
@@ -46,7 +46,7 @@ Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
 [TestCommand/Empty_cyclonedx_1.5_output - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 ---
 
@@ -65,7 +65,7 @@ Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
 [TestCommand/Empty_cyclonedx_1.6_output - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 ---
 
@@ -84,7 +84,7 @@ Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
 [TestCommand/Empty_cyclonedx_1.7_output - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 ---
 
@@ -95,7 +95,7 @@ Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
 [TestCommand/Empty_gh-annotations_output - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 ---
 
@@ -153,7 +153,7 @@ Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
 [TestCommand/Empty_sarif_output - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 ---
 
@@ -194,7 +194,7 @@ Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
 [TestCommand/Empty_spdx_2.3_output - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 ---
 
@@ -437,7 +437,7 @@ Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -1366,7 +1366,7 @@ invalid verbosity level "unknown" - must be one of: error, warn, info
 [TestCommand/json_output - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 ---
 
@@ -1482,7 +1482,7 @@ could not determine extractor, requested spdx
 [TestCommand/one_specific_supported_lockfile - 1 - stdout]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -1495,7 +1495,7 @@ No issues found
 [TestCommand/one_specific_supported_lockfile_with_ignore - 1 - stdout]
 Scanning dir ./testdata/locks-test-ignore/package-lock.json
 Scanned <rootdir>/testdata/locks-test-ignore/package-lock.json file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-test-ignore/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-test-ignore/osv-scanner-test.toml (annotate#132)
 CVE-2021-23424 and 1 alias have been filtered out because: Test manifest file (package-lock.json)
 Filtered 1 vulnerability from output
 
@@ -1510,7 +1510,7 @@ No issues found
 [TestCommand/one_specific_supported_lockfile_with_offline_explicitly_false - 1 - stdout]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2068,7 +2068,7 @@ No issues found
 [TestCommand/verbosity_level_info - 1 - stdout]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2081,7 +2081,7 @@ No issues found
 [TestCommandNonGit/one_specific_supported_lockfile - 1 - stdout]
 Scanning dir <tempdir>/composer.lock
 Scanned <tempdir>/composer.lock file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2466,7 +2466,7 @@ Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2482,7 +2482,7 @@ Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2498,7 +2498,7 @@ Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 Total 0 packages affected by 0 known vulnerabilities (0 Critical, 0 High, 0 Medium, 0 Low, 0 Unknown) from 0 ecosystems.
 0 vulnerabilities can be fixed.
@@ -2516,7 +2516,7 @@ Scanning dir ./testdata/locks-many
 Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2532,7 +2532,7 @@ Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2545,7 +2545,7 @@ No issues found
 [TestCommand_ExplicitExtractors_WithDefaults/scanning_file_with_one_different_extractor_enabled - 1 - stdout]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2558,7 +2558,7 @@ No issues found
 [TestCommand_ExplicitExtractors_WithDefaults/scanning_file_with_one_specific_extractor_enabled - 1 - stdout]
 Scanning dir ./testdata/locks-many/package-lock.json
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2617,7 +2617,7 @@ at least one extractor must be enabled
 Scanning dir ./testdata/locks-many
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2631,7 +2631,7 @@ No issues found
 Scanning dir ./testdata/locks-many
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2644,7 +2644,7 @@ No issues found
 [TestCommand_ExplicitExtractors_WithoutDefaults/scanning_directory_with_an_extractor_that_does_not_exist - 1 - stdout]
 Scanning dir ./testdata/locks-many
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 Total 0 packages affected by 0 known vulnerabilities (0 Critical, 0 High, 0 Medium, 0 Low, 0 Unknown) from 0 ecosystems.
 0 vulnerabilities can be fixed.
@@ -2662,7 +2662,7 @@ Scanning dir ./testdata/locks-many
 Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2675,7 +2675,7 @@ No issues found
 [TestCommand_ExplicitExtractors_WithoutDefaults/scanning_directory_with_one_specific_extractor_enabled_and_no_defaults - 1 - stdout]
 Scanning dir ./testdata/locks-many
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -2698,7 +2698,7 @@ No package sources found, --help for usage information.
 [TestCommand_ExplicitExtractors_WithoutDefaults/scanning_file_with_one_specific_extractor_enabled - 1 - stdout]
 Scanning dir ./testdata/locks-many/package-lock.json
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -3354,7 +3354,7 @@ You can also view the full vulnerability list in your terminal with: `osv-scanne
 [TestCommand_HtmlFile - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 HTML output available at: <tempdir>/report.html
 
 ---
@@ -3367,7 +3367,7 @@ HTML output available at: <tempdir>/report.html
 Warning: --output has been deprecated in favor of --output-file
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 HTML output available at: <tempdir>/report.html
 
 ---
@@ -3840,7 +3840,7 @@ Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 Total 0 packages affected by 0 known vulnerabilities (0 Critical, 0 High, 0 Medium, 0 Low, 0 Unknown) from 0 ecosystems.
 0 vulnerabilities can be fixed.
@@ -3865,7 +3865,7 @@ Scanned <rootdir>/testdata/locks-many/Gemfile.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
 Scanned <rootdir>/testdata/locks-many/package-lock.json file and found 1 package
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 Total 0 packages affected by 0 known vulnerabilities (0 Critical, 0 High, 0 Medium, 0 Low, 0 Unknown) from 0 ecosystems.
 0 vulnerabilities can be fixed.
@@ -4487,7 +4487,7 @@ No issues found
 [TestCommand_LocalDatabases/one_specific_supported_lockfile - 1 - stdout]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 Loaded Packagist local db from <tempdir>/osv-scalibr/Packagist/all.zip
 
 No issues found
@@ -4501,7 +4501,7 @@ No issues found
 [TestCommand_LocalDatabases/one_specific_supported_lockfile - 3 - stdout]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 Loaded Packagist local db from <tempdir>/osv-scalibr/Packagist/all.zip
 
 No issues found
@@ -4615,7 +4615,7 @@ No issues found
 [TestCommand_LocalDatabases/output_format_markdown_table - 1 - stdout]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 Loaded Packagist local db from <tempdir>/osv-scalibr/Packagist/all.zip
 
 No issues found
@@ -4629,7 +4629,7 @@ No issues found
 [TestCommand_LocalDatabases/output_format_markdown_table - 3 - stdout]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 Loaded Packagist local db from <tempdir>/osv-scalibr/Packagist/all.zip
 
 No issues found
@@ -4656,7 +4656,7 @@ No issues found
 [TestCommand_LocalDatabases/output_with_json - 2 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 Loaded Packagist local db from <tempdir>/osv-scalibr/Packagist/all.zip
 
 ---
@@ -4677,7 +4677,7 @@ Loaded Packagist local db from <tempdir>/osv-scalibr/Packagist/all.zip
 [TestCommand_LocalDatabases/output_with_json - 4 - stderr]
 Scanning dir ./testdata/locks-many/composer.lock
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 Loaded Packagist local db from <tempdir>/osv-scalibr/Packagist/all.zip
 
 ---
@@ -4742,7 +4742,7 @@ Error during extraction: (extracting as vulnmatch/osvlocal) unable to fetch OSV 
 
 [TestCommand_LockfileWithExplicitParseAs/absolute_paths_are_automatically_escaped_on_windows - 1 - stdout]
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -4764,7 +4764,7 @@ extraction failed on specified lockfile
 
 [TestCommand_LockfileWithExplicitParseAs/absolute_paths_work_with_explicit_escaping - 1 - stdout]
 Scanned <rootdir>/testdata/locks-many/yarn.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -4776,7 +4776,7 @@ No issues found
 
 [TestCommand_LockfileWithExplicitParseAs/apk-installed_is_supported - 1 - stdout]
 Scanned <rootdir>/testdata/locks-many/installed file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -4788,7 +4788,7 @@ No issues found
 
 [TestCommand_LockfileWithExplicitParseAs/dpkg-status_is_supported - 1 - stdout]
 Scanned <rootdir>/testdata/locks-many/status file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -4800,7 +4800,7 @@ No issues found
 
 [TestCommand_LockfileWithExplicitParseAs/empty_is_default - 1 - stdout]
 Scanned <rootdir>/testdata/locks-many/composer.lock file and found 1 package
-Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml
+Loaded filter from: <rootdir>/testdata/locks-many/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -5568,10 +5568,10 @@ Scanned <tempdir>/composer.lock file and found 0 packages
 Scanned <tempdir>/nested-1/package-lock.json file and found 3 packages
 Scanned <tempdir>/nested-2/package-lock.json file and found 3 packages
 Scanned <tempdir>/package-lock.json file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 warning: <tempdir>/nested-2/osv-scanner-test.toml has multiple ignores for GHSA-2g4f-4pwh-qvx6 - only the first will be used!
-Loaded filter from: <tempdir>/nested-2/osv-scanner-test.toml
-Loaded filter from: <tempdir>/nested-1/osv-scanner-test.toml
+Loaded filter from: <tempdir>/nested-2/osv-scanner-test.toml (annotate#132)
+Loaded filter from: <tempdir>/nested-1/osv-scanner-test.toml (annotate#132)
 CVE-2021-23424 and 1 alias have been filtered out because: Test manifest file (package-lock.json)
 GHSA-2g4f-4pwh-qvx6 and 1 alias have been filtered out because: (no reason given)
 GHSA-2g4f-4pwh-qvx6 and 1 alias have been filtered out because: (no reason given)
@@ -5733,9 +5733,9 @@ Scanned <tempdir>/composer.lock file and found 0 packages
 Scanned <tempdir>/nested-1/package-lock.json file and found 3 packages
 Scanned <tempdir>/nested-2/package-lock.json file and found 3 packages
 Scanned <tempdir>/package-lock.json file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
-Loaded filter from: <tempdir>/nested-2/osv-scanner-test.toml
-Loaded filter from: <tempdir>/nested-1/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
+Loaded filter from: <tempdir>/nested-2/osv-scanner-test.toml (annotate#132)
+Loaded filter from: <tempdir>/nested-1/osv-scanner-test.toml (annotate#132)
 GHSA-5prr-v3j2-97mh and 1 alias have been filtered out because: (no reason given)
 GHSA-5v8h-3h3q-446p and 1 alias have been filtered out because: (no reason given)
 GHSA-8678-w3jw-xfc2 and 1 alias have been filtered out because: (no reason given)
@@ -5968,9 +5968,9 @@ Scanned <tempdir>/composer.lock file and found 0 packages
 Scanned <tempdir>/nested-1/package-lock.json file and found 3 packages
 Scanned <tempdir>/nested-2/package-lock.json file and found 3 packages
 Scanned <tempdir>/package-lock.json file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 warning: <tempdir>/nested-2/osv-scanner-test.toml has multiple ignores for GHSA-2g4f-4pwh-qvx6 - only the first will be used!
-Loaded filter from: <tempdir>/nested-2/osv-scanner-test.toml
+Loaded filter from: <tempdir>/nested-2/osv-scanner-test.toml (annotate#132)
 GHSA-2g4f-4pwh-qvx6 and 1 alias have been filtered out because: (no reason given)
 GHSA-2g4f-4pwh-qvx6 and 1 alias have been filtered out because: (no reason given)
 Filtered 2 vulnerabilities from output
@@ -6124,8 +6124,8 @@ Scanned <tempdir>/composer.lock file and found 0 packages
 Scanned <tempdir>/nested-1/package-lock.json file and found 3 packages
 Scanned <tempdir>/nested-2/package-lock.json file and found 3 packages
 Scanned <tempdir>/package-lock.json file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
-Loaded filter from: <tempdir>/nested-2/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
+Loaded filter from: <tempdir>/nested-2/osv-scanner-test.toml (annotate#132)
 GHSA-5prr-v3j2-97mh and 1 alias have been filtered out because: (no reason given)
 GHSA-5v8h-3h3q-446p and 1 alias have been filtered out because: (no reason given)
 GHSA-8678-w3jw-xfc2 and 1 alias have been filtered out because: (no reason given)
@@ -6514,7 +6514,7 @@ Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
 Scanned <tempdir>/package-lock.json file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 
 Total 2 packages affected by 12 known vulnerabilities (0 Critical, 2 High, 3 Medium, 6 Low, 1 Unknown) from 2 ecosystems.
 12 vulnerabilities can be fixed.
@@ -6632,7 +6632,7 @@ Scanning dir <tempdir>
 Scanned <tempdir>/Gemfile.lock file and found 1 package
 Scanned <tempdir>/composer.lock file and found 0 packages
 Scanned <tempdir>/package-lock.json file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 GHSA-5prr-v3j2-97mh and 1 alias have been filtered out because: (no reason given)
 GHSA-5v8h-3h3q-446p and 1 alias have been filtered out because: (no reason given)
 GHSA-8678-w3jw-xfc2 and 1 alias have been filtered out because: (no reason given)
@@ -6793,7 +6793,7 @@ lockfile:<tempdir>/package-lock.json: found 1 package with issues
 [TestCommand_WithDetector_OffLinux/ssh_version_errors - 1 - stdout]
 Scanning dir <tempdir>/composer.lock
 Scanned <tempdir>/composer.lock file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -6806,7 +6806,7 @@ No issues found
 [TestCommand_WithDetector_OffLinux/ssh_version_is_after_last_vuln_version - 1 - stdout]
 Scanning dir <tempdir>/composer.lock
 Scanned <tempdir>/composer.lock file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -6819,7 +6819,7 @@ No issues found
 [TestCommand_WithDetector_OffLinux/ssh_version_is_before_first_vuln_version - 1 - stdout]
 Scanning dir <tempdir>/composer.lock
 Scanned <tempdir>/composer.lock file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -6833,7 +6833,7 @@ No issues found
 Scanning dir <tempdir>/composer.lock
 Scanned <tempdir>/composer.lock file and found 1 package
 Command "ssh -V": exit status 1
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -6846,7 +6846,7 @@ No issues found
 [TestCommand_WithDetector_OnLinux/ssh_version_is_after_last_vuln_version - 1 - stdout]
 Scanning dir <tempdir>/composer.lock
 Scanned <tempdir>/composer.lock file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 
 No issues found
 
@@ -6859,7 +6859,7 @@ No issues found
 [TestCommand_WithDetector_OnLinux/ssh_version_is_before_first_vuln_version - 1 - stdout]
 Scanning dir <tempdir>/composer.lock
 Scanned <tempdir>/composer.lock file and found 1 package
-Loaded filter from: <tempdir>/osv-scanner-test.toml
+Loaded filter from: <tempdir>/osv-scanner-test.toml (annotate#132)
 
 No issues found
 

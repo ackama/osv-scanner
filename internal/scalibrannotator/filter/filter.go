@@ -129,7 +129,7 @@ func (a *Annotator) Annotate(_ context.Context, _ *annotator.ScanInput, results 
 
 		// 3. Filter Ignored Packages according to config
 		if a.configManager != nil {
-			configToUse := a.configManager.Get(imodels.Location(psr))
+			configToUse := a.configManager.Get(imodels.Location(psr), "annotate#132")
 			if ignore, ignoreLine := configToUse.ShouldIgnorePackage(psr); ignore {
 				ignoredCount++
 				pkgString := fmt.Sprintf("%s/%s/%s", imodels.Ecosystem(psr).String(), imodels.Name(psr), imodels.Version(psr))
